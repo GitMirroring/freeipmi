@@ -1,3 +1,9 @@
+2026-09-09 Albert Chu <chu11@llnl.gov>
+
+	* libfreeipmi/sel/ipmi-sel-string-intel-node-manager.c
+	(sel_string_output_intel_node_manager_event_data1_class_oem): Decode
+	each DIMM memory controller's availability from its own status bit.
+
 2026-09-03 Albert Chu <chu11@llnl.gov>
 
 	* ipmiseld/ipmiseld.c (_sel_log_format), ipmiseld/ipmiseld.h,
