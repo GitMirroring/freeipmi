@@ -1,5 +1,11 @@
 2026-09-09 Albert Chu <chu11@llnl.gov>
 
+	* libfreeipmi/sel/ipmi-sel-string-intel-node-manager.c
+	(sel_string_output_intel_node_manager_event_data1_class_oem): Decode
+	each DIMM memory controller's availability from its own status bit.
+
+2026-09-09 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/sel/ipmi-sel.c (ipmi_sel_parse): Bound the number of
 	SEL records parsed so a cyclic next-record chain cannot loop
 	indefinitely.
