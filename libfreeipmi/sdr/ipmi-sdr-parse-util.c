@@ -256,7 +256,7 @@ ipmi_sdr_parse_sensor_name (ipmi_sdr_ctx_t ctx,
               "%s",
               id_string_ptr);
 
-  return (0);
+  return (strlen (buf));
 }
 
 int
@@ -517,5 +517,5 @@ ipmi_sdr_parse_entity_sensor_name (ipmi_sdr_ctx_t ctx,
         }
     }
 
-  return (0);
+  return (strlen (buf));
 }
