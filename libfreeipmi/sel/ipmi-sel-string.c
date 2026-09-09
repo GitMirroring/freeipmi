@@ -691,6 +691,7 @@ _output_event_interpretation (ipmi_sel_ctx_t ctx,
   unsigned int interpret_flags;
   unsigned int sel_state;
   char *sel_state_str = NULL;
+  int interpret_ret;
 
   assert (ctx);
   assert (ctx->magic == IPMI_SEL_CTX_MAGIC);
@@ -728,16 +729,18 @@ _output_event_interpretation (ipmi_sel_ctx_t ctx,
       return (-1);
     }
 
-  if (ipmi_interpret_sel (ctx->interpret_ctx,
-                          sel_entry->sel_event_record,
-                          sel_entry->sel_event_record_len,
-                          &sel_state) < 0)
+  interpret_ret = ipmi_interpret_sel (ctx->interpret_ctx,
+                                      sel_entry->sel_event_record,
+                                      sel_entry->sel_event_record_len,
+                                      &sel_state);
+
+  if (ipmi_interpret_ctx_set_flags (ctx->interpret_ctx, interpret_flags_save) < 0)
     {
       SEL_SET_ERRNUM (ctx, IPMI_SEL_ERR_INTERPRET_ERROR);
       return (-1);
     }
 
-  if (ipmi_interpret_ctx_set_flags (ctx->interpret_ctx, interpret_flags_save) < 0)
+  if (interpret_ret < 0)
     {
       SEL_SET_ERRNUM (ctx, IPMI_SEL_ERR_INTERPRET_ERROR);
       return (-1);

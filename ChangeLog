@@ -1,5 +1,11 @@
 2026-09-09 Albert Chu <chu11@llnl.gov>
 
+	* libfreeipmi/sel/ipmi-sel-string.c (_output_event_interpretation):
+	Restore the caller's interpretation flags when event interpretation
+	fails.
+
+2026-09-09 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/sel/ipmi-sel-string.c (sel_format_record_string): Clear
 	the format conversion state after processing %c.
 
