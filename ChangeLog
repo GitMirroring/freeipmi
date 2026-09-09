@@ -1,5 +1,10 @@
 2026-09-09 Albert Chu <chu11@llnl.gov>
 
+	* libfreeipmi/sel/ipmi-sel-string.c (sel_format_record_string): Clear
+	the format conversion state after processing %c.
+
+2026-09-09 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/sel/ipmi-sel-string-intel-windmill.c
 	(sel_string_output_intel_windmill_oem_record_data): Decode the Device
 	ID from its own record bytes.

@@ -2822,6 +2822,7 @@ sel_format_record_string (ipmi_sel_ctx_t ctx,
             goto cleanup;
           if (ret)
             goto out;
+          percent_flag = 0;
         }
       else if (percent_flag && *fmt == 'p') /* event data2 previous state */
         {
