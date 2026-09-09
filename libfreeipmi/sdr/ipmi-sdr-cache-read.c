@@ -879,11 +879,13 @@ ipmi_sdr_cache_iterate (ipmi_sdr_ctx_t ctx,
       goto cleanup;
     }
 
-  for (i = 0; i < record_count; i++, ipmi_sdr_cache_next (ctx))
+  i = 0;
+  while (i < record_count)
     {
       uint8_t sdr_record[IPMI_SDR_MAX_RECORD_LENGTH];
       int sdr_record_len;
       uint8_t record_type;
+      int next_ret;
       int ret;
 
       memset (sdr_record, '\0', IPMI_SDR_MAX_RECORD_LENGTH);
@@ -918,6 +920,17 @@ ipmi_sdr_cache_iterate (ipmi_sdr_ctx_t ctx,
           rv = ret;
           goto out;
         }
+
+      i++;
+
+      if ((next_ret = ipmi_sdr_cache_next (ctx)) < 0)
+        {
+          SDR_SET_INTERNAL_ERRNUM (ctx);
+          goto cleanup;
+        }
+
+      if (!next_ret)
+        break;
     }
 
   rv = 0;

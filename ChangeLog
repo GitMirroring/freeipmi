@@ -1,5 +1,11 @@
 2026-09-09 Albert Chu <chu11@llnl.gov>
 
+	* libfreeipmi/sdr/ipmi-sdr-cache-read.c (ipmi_sdr_cache_iterate):
+	Check cache traversal results so iteration stops at the final record
+	and reports traversal errors.
+
+2026-09-09 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/sel/ipmi-sel-string.c (_output_event_interpretation):
 	Restore the caller's interpretation flags when event interpretation
 	fails.
