@@ -1,5 +1,11 @@
 2026-09-09 Albert Chu <chu11@llnl.gov>
 
+	* libfreeipmi/sel/ipmi-sel-string-intel-windmill.c
+	(sel_string_output_intel_windmill_oem_record_data): Decode the Device
+	ID from its own record bytes.
+
+2026-09-09 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/sel/ipmi-sel-string-intel-node-manager.c
 	(sel_string_output_intel_node_manager_event_data1_class_oem): Decode
 	each DIMM memory controller's availability from its own status bit.
