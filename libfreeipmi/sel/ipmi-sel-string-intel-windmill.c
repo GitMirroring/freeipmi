@@ -1026,8 +1026,8 @@ sel_string_output_intel_windmill_oem_record_data (ipmi_sel_ctx_t ctx,
       uint16_t error_code;
       char *error_code_str;
 
-      device_id = sel_entry->sel_event_record[IPMI_SEL_OEM_INTEL_WINDMILL_DEVICE_IDENTIFICATION_NUMBER_INDEX_LSB_INDEX];
-      device_id |= (sel_entry->sel_event_record[IPMI_SEL_OEM_INTEL_WINDMILL_DEVICE_IDENTIFICATION_NUMBER_INDEX_MSB_INDEX] << 8);
+      device_id = sel_entry->sel_event_record[IPMI_SEL_OEM_INTEL_WINDMILL_DEVICE_ID_INDEX_LSB_INDEX];
+      device_id |= (sel_entry->sel_event_record[IPMI_SEL_OEM_INTEL_WINDMILL_DEVICE_ID_INDEX_MSB_INDEX] << 8);
 
       device_identification_number = sel_entry->sel_event_record[IPMI_SEL_OEM_INTEL_WINDMILL_DEVICE_IDENTIFICATION_NUMBER_INDEX_LSB_INDEX];
       device_identification_number |= (sel_entry->sel_event_record[IPMI_SEL_OEM_INTEL_WINDMILL_DEVICE_IDENTIFICATION_NUMBER_INDEX_MSB_INDEX] << 8);
