@@ -1,5 +1,11 @@
 2026-09-09 Albert Chu <chu11@llnl.gov>
 
+	* libfreeipmi/sel/ipmi-sel.c (ipmi_sel_parse): Bound the number of
+	SEL records parsed so a cyclic next-record chain cannot loop
+	indefinitely.
+
+2026-09-09 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/sdr/ipmi-sdr-parse-util.c
 	(ipmi_sdr_parse_sensor_name, ipmi_sdr_parse_entity_sensor_name): Return
 	the stored sensor name length as documented.

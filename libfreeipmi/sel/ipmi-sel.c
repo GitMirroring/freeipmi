@@ -30,6 +30,7 @@
 #endif /* HAVE_UNISTD_H */
 #include <assert.h>
 #include <errno.h>
+#include <limits.h>
 
 #include "freeipmi/sel/ipmi-sel.h"
 
@@ -913,6 +914,7 @@ ipmi_sel_parse (ipmi_sel_ctx_t ctx,
   int reservation_id_initialized = 0;
   uint16_t record_id = 0;
   uint16_t next_record_id = 0;
+  unsigned int record_count = 0;
   int parsed_atleast_one_entry = 0;
   fiid_obj_t obj_cmd_rs = NULL;
   uint64_t val;
@@ -1053,6 +1055,13 @@ ipmi_sel_parse (ipmi_sel_ctx_t ctx,
        record_id <= record_id_last && record_id != IPMI_SEL_GET_RECORD_ID_LAST_ENTRY;
        record_id = next_record_id)
     {
+      if (record_count >= USHRT_MAX)
+        {
+          SEL_SET_ERRNUM (ctx, IPMI_SEL_ERR_IPMI_ERROR);
+          goto cleanup;
+        }
+      record_count++;
+
       if (_get_sel_entry (ctx,
                           obj_cmd_rs,
                           &reservation_id,
