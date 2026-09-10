@@ -1,5 +1,11 @@
 2026-09-10 Albert Chu <chu11@llnl.gov>
 
+	* libfreeipmi/include/freeipmi/spec/oem/ipmi-oem-dell-spec.h: Build
+	the aggregate email alert configuration mask from the defined field
+	mask constants.
+
+2026-09-10 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/include/freeipmi/record-format/ipmi-sel-record-format.h:
 	Remove declarations for undefined legacy SEL templates.
 
