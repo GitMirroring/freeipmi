@@ -360,7 +360,7 @@ _get_system_event_event_data2_message_offset_pef_action (unsigned int offset, ui
       goto cleanup;
     }
 
-  rv = 0;
+  rv = str_len;
  cleanup:
   fiid_obj_destroy (obj);
   return (rv);
