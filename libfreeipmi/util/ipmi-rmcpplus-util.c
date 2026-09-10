@@ -1358,10 +1358,23 @@ ipmi_rmcpplus_check_packet_session_authentication_code (uint8_t integrity_algori
       if (authentication_code_data && authentication_code_data_len)
         memcpy (pwbuf, authentication_code_data, authentication_code_data_len);
 
+      if (IPMI_2_0_MAX_PASSWORD_LENGTH > (IPMI_MAX_PAYLOAD_LENGTH - hash_data_len))
+        {
+          rv = 0;
+          goto cleanup;
+        }
+
       memcpy (hash_data + hash_data_len,
               pwbuf,
               IPMI_2_0_MAX_PASSWORD_LENGTH);
       hash_data_len += IPMI_2_0_MAX_PASSWORD_LENGTH;
+    }
+
+  if ((pkt_len - rmcp_header_len - compare_digest_len)
+      > (IPMI_MAX_PAYLOAD_LENGTH - hash_data_len))
+    {
+      rv = 0;
+      goto cleanup;
     }
 
   memcpy (hash_data + hash_data_len, pkt + rmcp_header_len, pkt_len - rmcp_header_len - compare_digest_len);
@@ -1369,6 +1382,12 @@ ipmi_rmcpplus_check_packet_session_authentication_code (uint8_t integrity_algori
 
   if (integrity_algorithm == IPMI_INTEGRITY_ALGORITHM_MD5_128)
     {
+      if (IPMI_2_0_MAX_PASSWORD_LENGTH > (IPMI_MAX_PAYLOAD_LENGTH - hash_data_len))
+        {
+          rv = 0;
+          goto cleanup;
+        }
+
       memcpy (hash_data + hash_data_len,
               pwbuf,
               IPMI_2_0_MAX_PASSWORD_LENGTH);
