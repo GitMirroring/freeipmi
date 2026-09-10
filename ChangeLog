@@ -1,5 +1,10 @@
 2026-09-10 Albert Chu <chu11@llnl.gov>
 
+	* libfreeipmi/include/Makefile.am: Install ipmi-cmd-oem-spec.h as a
+	public compatibility header.
+
+2026-09-10 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/include/freeipmi/sdr/oem/
 	ipmi-sdr-oem-intel-node-manager.h: Include the fixed-width integer and
 	SDR context declarations required by the public parsing prototype.

@@ -83,6 +83,7 @@ nobase_include_HEADERS = \
 	freeipmi/spec/ipmi-channel-spec.h \
 	freeipmi/spec/ipmi-cmd-spec.h \
 	freeipmi/spec/ipmi-cmd-dcmi-spec.h \
+	freeipmi/spec/ipmi-cmd-oem-spec.h \
 	freeipmi/spec/ipmi-comp-code-spec.h \
 	freeipmi/spec/ipmi-comp-code-dcmi-spec.h \
 	freeipmi/spec/ipmi-comp-code-oem-spec.h \
