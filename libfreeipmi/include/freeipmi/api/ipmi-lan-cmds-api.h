@@ -177,7 +177,7 @@ int ipmi_cmd_set_lan_configuration_parameters_vlan_id (ipmi_ctx_t ctx,
 
 int ipmi_cmd_set_lan_configuration_parameters_vlan_priority (ipmi_ctx_t ctx,
                                                              uint8_t channel_number,
-                                                             uint32_t vlan_priority,
+                                                             uint8_t vlan_priority,
                                                              fiid_obj_t obj_cmd_rs);
 
 int ipmi_cmd_set_lan_configuration_parameters_rmcpplus_messaging_cipher_suite_privilege_levels (ipmi_ctx_t ctx,

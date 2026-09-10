@@ -1,5 +1,12 @@
 2026-09-10 Albert Chu <chu11@llnl.gov>
 
+	* libfreeipmi/api/ipmi-lan-cmds-api.c,
+	libfreeipmi/include/freeipmi/api/ipmi-lan-cmds-api.h
+	(ipmi_cmd_set_lan_configuration_parameters_vlan_priority): Use the
+	byte-sized VLAN priority type expected by the command builder.
+
+2026-09-10 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/interpret/ipmi-interpret-config-common.c
 	(interpret_config_parse_manufacturer_id_product_id): Reject more
 	manufacturer and product ID groups than the parser can store.
