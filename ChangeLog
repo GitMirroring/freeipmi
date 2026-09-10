@@ -1,5 +1,11 @@
 2026-09-09 Albert Chu <chu11@llnl.gov>
 
+	* libfreeipmi/fiid/fiid.c (fiid_obj_dup): Preserve packet-sufficiency
+	and secure-clear behavior in duplicated objects, and securely clear
+	sensitive copied data if duplication fails.
+
+2026-09-09 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/sdr/ipmi-sdr-cache-read.c (ipmi_sdr_cache_iterate):
 	Check cache traversal results so iteration stops at the final record
 	and reports traversal errors.

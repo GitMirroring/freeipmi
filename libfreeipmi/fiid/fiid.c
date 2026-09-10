@@ -1069,6 +1069,8 @@ fiid_obj_dup (fiid_obj_t src_obj)
   dest_obj->magic = src_obj->magic;
   dest_obj->data_len = src_obj->data_len;
   dest_obj->field_data_len = src_obj->field_data_len;
+  dest_obj->makes_packet_sufficient = src_obj->makes_packet_sufficient;
+  dest_obj->secure_memset_on_clear = src_obj->secure_memset_on_clear;
 
   if (!(dest_obj->data = malloc (src_obj->data_len)))
     {
@@ -1103,6 +1105,8 @@ fiid_obj_dup (fiid_obj_t src_obj)
  cleanup:
   if (dest_obj)
     {
+      if (dest_obj->data && dest_obj->secure_memset_on_clear)
+        secure_memset (dest_obj->data, '\0', dest_obj->data_len);
       free (dest_obj->data);
       free (dest_obj->field_data);
       hash_destroy (dest_obj->lookup);
