@@ -2097,10 +2097,9 @@ FIID_OBJ_GET (fiid_obj_t obj,
               const char *field,
               uint64_t *val)
 {
-  uint64_t lval;
   int ret;
 
-  if ((ret = fiid_obj_get (obj, field, &lval)) < 0)
+  if ((ret = fiid_obj_get (obj, field, val)) < 0)
     return (ret);
 
   if (!ret)
@@ -2109,7 +2108,6 @@ FIID_OBJ_GET (fiid_obj_t obj,
       return (-1);
     }
 
-  *val = lval;
   return (ret);
 }
 

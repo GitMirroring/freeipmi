@@ -1,5 +1,10 @@
 2026-09-09 Albert Chu <chu11@llnl.gov>
 
+	* libfreeipmi/fiid/fiid.c (FIID_OBJ_GET): Pass input parameter
+	to wrapper instead of using local variable.
+
+2026-09-09 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/fiid/fiid.c (fiid_obj_dup): Preserve packet-sufficiency
 	and secure-clear behavior in duplicated objects, and securely clear
 	sensitive copied data if duplication fails.
