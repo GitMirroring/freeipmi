@@ -1,5 +1,12 @@
 2026-09-10 Albert Chu <chu11@llnl.gov>
 
+	* libfreeipmi/record-format/ipmi-fru-dimmspd-record-format.c,
+	libfreeipmi/include/freeipmi/templates/
+	ipmi-fru-dimmspd-record-format-templates.h: Give the final DDR4 LRDIMM
+	reserved field a unique name.
+
+2026-09-10 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/interface/ipmi-rmcpplus-interface.c
 	(_construct_session_trlr_authentication_code): Check the remaining hash
 	buffer capacity before copying each packet or password segment.

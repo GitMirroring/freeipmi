@@ -524,7 +524,7 @@ fiid_template_t tmpl_fru_dimm_spd_ddr4_module_specific_load_reduction_memory_mod
     { 3, "dram_odt_strength_rtt_park_ranks_2_3_lt_3200", FIID_FIELD_REQUIRED | FIID_FIELD_LENGTH_FIXED},
     { 2, "reserved20", FIID_FIELD_REQUIRED | FIID_FIELD_LENGTH_FIXED},
     /* Bytes 139-253: Reserved */
-    { 792, "reserved4", FIID_FIELD_REQUIRED | FIID_FIELD_LENGTH_FIXED},
+    { 792, "reserved21", FIID_FIELD_REQUIRED | FIID_FIELD_LENGTH_FIXED},
     /* Bytes 254-255: CRC */
     { 16, "crc", FIID_FIELD_REQUIRED | FIID_FIELD_LENGTH_FIXED},
     { 0, "", 0}
