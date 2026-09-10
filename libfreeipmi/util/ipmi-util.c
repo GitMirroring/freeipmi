@@ -169,7 +169,9 @@ int
 ipmi_get_random (void *buf, unsigned int buflen)
 {
 #if (HAVE_DEVURANDOM || HAVE_DEVRANDOM)
-  int fd, len, rv = -1;
+  unsigned int offset = 0;
+  ssize_t len;
+  int fd, saved_errno, rv = -1;
 #endif /* !(HAVE_DEVURANDOM || HAVE_DEVRANDOM) */
 
   if (!buf)
@@ -184,22 +186,37 @@ ipmi_get_random (void *buf, unsigned int buflen)
 #if (HAVE_DEVURANDOM || HAVE_DEVRANDOM)
 #if HAVE_DEVURANDOM
   if ((fd = open ("/dev/urandom", O_RDONLY)) < 0)
-    goto cleanup;
+    return (-1);
 #else  /* !HAVE_DEVURANDOM */
   if ((fd = open ("/dev/random", O_RDONLY)) < 0)
-    goto cleanup;
+    return (-1);
 #endif /* !HAVE_DEVURANDOM */
 
-  if ((len = read (fd, buf, buflen)) < 0)
-    goto cleanup;
+  while (offset < buflen)
+    {
+      if ((len = read (fd, (uint8_t *)buf + offset, buflen - offset)) < 0)
+        {
+          if (errno == EINTR)
+            continue;
+          goto cleanup;
+        }
 
-  if (((unsigned int)len) < buflen)
-    goto cleanup;
+      if (!len)
+        {
+          SET_ERRNO (EIO);
+          goto cleanup;
+        }
 
-  rv = len;
+      offset += len;
+    }
+
+  rv = offset;
  cleanup:
+  saved_errno = errno;
   /* ignore potential error, cleanup path */
   close (fd);
+  if (rv < 0)
+    SET_ERRNO (saved_errno);
   return (rv);
 #else /* !(HAVE_DEVURANDOM || HAVE_DEVRANDOM) */
   SET_ERRNO (EPERM);
@@ -632,4 +649,3 @@ ipmi_cmd_str (uint8_t net_fn, uint8_t cmd)
       return "Unknown";
     }
 }
-
