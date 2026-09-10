@@ -253,6 +253,12 @@ interpret_config_parse_manufacturer_id_product_id (conffile_t cf,
       manufacturer_id_ptr = strtok_r (NULL, ",", &manufacturer_id_lasts);
     }
 
+  if (manufacturer_id_ptr)
+    {
+      conffile_seterrnum (cf, CONFFILE_ERR_PARSE_ARG_TOOMANY);
+      goto cleanup;
+    }
+
   rv = 0;
  cleanup:
   free (tmpstr);
