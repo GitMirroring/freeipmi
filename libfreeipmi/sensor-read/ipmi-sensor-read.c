@@ -109,6 +109,7 @@ ipmi_sensor_read_ctx_create (ipmi_ctx_t ipmi_ctx)
     }
 
   ctx->magic = IPMI_SENSOR_READ_CTX_MAGIC;
+  ctx->errnum = IPMI_SENSOR_READ_ERR_SUCCESS;
   ctx->flags = IPMI_SENSOR_READ_FLAGS_DEFAULT;
   ctx->ipmi_ctx = ipmi_ctx;
   ctx->sdr_ctx = NULL;
@@ -990,7 +991,10 @@ ipmi_sensor_read (ipmi_sensor_read_ctx_t ctx,
     /* nothing to do, sensor_event_bitmask already set */
     rv = 1;
   else
-    rv = 0;
+    {
+      SENSOR_READ_SET_ERRNUM (ctx, IPMI_SENSOR_READ_ERR_SDR_ENTRY_ERROR);
+      rv = 0;
+    }
 
  cleanup:
   if (ctx_flags_changed)

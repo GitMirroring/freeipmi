@@ -1,5 +1,11 @@
 2026-09-10 Albert Chu <chu11@llnl.gov>
 
+	* libfreeipmi/sensor-read/ipmi-sensor-read.c
+	(ipmi_sensor_read_ctx_create, ipmi_sensor_read): Initialize and update
+	the sensor read error state on all return paths.
+
+2026-09-10 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/sensor-read/ipmi-sensor-read.c (ipmi_sensor_read):
 	Reject shared sensor offsets outside the record's sensor number range.
 
