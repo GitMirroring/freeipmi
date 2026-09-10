@@ -134,8 +134,6 @@ _myread (ipmi_locate_ctx_t ctx,
         {
           if (errno != EINTR)
             {
-              /* ignore potential error, error path */
-              close (fd);
               LOCATE_ERRNO_TO_LOCATE_ERRNUM (ctx, errno);
               return (-1);
             }
@@ -147,8 +145,6 @@ _myread (ipmi_locate_ctx_t ctx,
   if (r2 != count)
     {
       LOCATE_SET_ERRNUM (ctx, IPMI_LOCATE_ERR_SYSTEM_ERROR);
-      /* ignore potential error, error path */
-      close (fd);
       return (-1);
     }
 
@@ -181,6 +177,7 @@ _mem_chunk (ipmi_locate_ctx_t ctx,
   void *p = NULL;
   void *rv = NULL;
   int fd = -1;
+  int saved_errno;
 #ifdef HAVE_MMAP
   size_t mmoffset;
   void *mmp;
@@ -254,10 +251,15 @@ _mem_chunk (ipmi_locate_ctx_t ctx,
   rv = p;
 
  cleanup:
+  saved_errno = errno;
   /* ignore potential error, cleanup path */
-  close (fd);
+  if (fd >= 0)
+    close (fd);
   if (!rv)
-    free (p);
+    {
+      free (p);
+      errno = saved_errno;
+    }
   return (rv);
 }
 

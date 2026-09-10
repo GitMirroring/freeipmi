@@ -1,5 +1,11 @@
 2026-09-10 Albert Chu <chu11@llnl.gov>
 
+	* libfreeipmi/locate/ipmi-locate-dmidecode.c (_myread, _mem_chunk):
+	Leave file descriptor ownership with the caller and preserve errno across
+	error cleanup.
+
+2026-09-10 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/locate/ipmi-locate-acpi-spmi.c
 	(_ipmi_acpi_get_table_sysfs): Free the ACPI table buffer when reading it
 	fails.
