@@ -1,5 +1,10 @@
 2026-09-10 Albert Chu <chu11@llnl.gov>
 
+	* libfreeipmi/libcommon/ipmi-crypt-gcrypt.c (_cipher_crypt): Retain the
+	actual gcrypt error returned when opening a cipher handle.
+
+2026-09-10 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/locate/ipmi-locate-dmidecode.c (_myread, _mem_chunk):
 	Leave file descriptor ownership with the caller and preserve errno across
 	error cleanup.

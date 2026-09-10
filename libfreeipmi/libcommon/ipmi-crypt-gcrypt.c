@@ -307,7 +307,7 @@ _cipher_crypt (unsigned int cipher_algorithm,
   if ((e = gcry_cipher_open (&h,
                              gcry_cipher_algorithm,
                              gcry_cipher_mode,
-                             0) != GPG_ERR_NO_ERROR))
+                             0)) != GPG_ERR_NO_ERROR)
     {
       ERR_GCRYPT_TRACE (e);
       SET_ERRNO (_gpg_error_to_errno (e));
