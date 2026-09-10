@@ -162,7 +162,7 @@ extern fiid_template_t tmpl_cmd_re_arm_sensor_events_rs;
 extern fiid_template_t tmpl_cmd_get_sensor_event_status_rq;
 extern fiid_template_t tmpl_cmd_get_sensor_event_status_rs;
 extern fiid_template_t tmpl_cmd_get_sensor_event_status_threshold_rs;
-extern fiid_template_t tmpl_cmd_get_sensor_event_status_discerete_rs;
+extern fiid_template_t tmpl_cmd_get_sensor_event_status_discrete_rs;
 
 extern fiid_template_t tmpl_cmd_get_sensor_reading_rq;
 extern fiid_template_t tmpl_cmd_get_sensor_reading_rs;

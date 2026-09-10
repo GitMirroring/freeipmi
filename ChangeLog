@@ -1,5 +1,11 @@
 2026-09-10 Albert Chu <chu11@llnl.gov>
 
+	* libfreeipmi/include/freeipmi/cmds/ipmi-sensor-cmds.h
+	(tmpl_cmd_get_sensor_event_status_discrete_rs): Correct the exported
+	template declaration's spelling.
+
+2026-09-10 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/api/ipmi-lan-session-common.c
 	(api_lan_close_session, api_lan_2_0_close_session): Release the
 	request object when response-object allocation fails.
