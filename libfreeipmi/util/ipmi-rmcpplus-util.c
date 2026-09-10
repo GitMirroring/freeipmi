@@ -1584,7 +1584,7 @@ ipmi_rmcpplus_calculate_payload_type (const void *pkt,
       return (-1);
     }
 
-  if (pkt_len <= rmcp_hdr_len)
+  if (pkt_len <= (rmcp_hdr_len + 1))
     {
       SET_ERRNO (EINVAL);
       return (-1);
