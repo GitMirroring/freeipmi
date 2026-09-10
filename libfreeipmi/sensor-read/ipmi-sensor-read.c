@@ -556,7 +556,8 @@ ipmi_sensor_read (ipmi_sensor_read_ctx_t ctx,
           goto cleanup;
         }
 
-      if ((sensor_number + share_count) < (sensor_number + shared_sensor_number_offset))
+      if (shared_sensor_number_offset >= share_count
+          || shared_sensor_number_offset > (UINT8_MAX - sensor_number))
         {
           SENSOR_READ_SET_ERRNUM (ctx, IPMI_SENSOR_READ_ERR_PARAMETERS);
           goto cleanup;

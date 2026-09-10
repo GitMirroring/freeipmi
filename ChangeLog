@@ -1,6 +1,11 @@
 2026-09-10 Albert Chu <chu11@llnl.gov>
 
 	* libfreeipmi/sensor-read/ipmi-sensor-read.c (ipmi_sensor_read):
+	Reject shared sensor offsets outside the record's sensor number range.
+
+2026-09-10 Albert Chu <chu11@llnl.gov>
+
+	* libfreeipmi/sensor-read/ipmi-sensor-read.c (ipmi_sensor_read):
 	Restore the caller's IPMI context flags when sensor retrieval fails.
 
 2026-09-09 Albert Chu <chu11@llnl.gov>
