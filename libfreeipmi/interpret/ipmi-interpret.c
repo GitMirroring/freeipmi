@@ -1183,12 +1183,12 @@ _get_sensor_state (ipmi_interpret_ctx_t ctx,
                                      &sensor_state_tmp) < 0)
             return (-1);
 
-          if (ctx->flags & IPMI_INTERPRET_FLAGS_IGNORE_UNRECOGNIZED_EVENTS)
+          if (sensor_state_tmp != IPMI_INTERPRET_STATE_UNKNOWN)
             {
-              if (sensor_state_tmp != IPMI_INTERPRET_STATE_UNKNOWN)
+              if (sensor_state_tmp > (*sensor_state))
                 (*sensor_state) = sensor_state_tmp;
             }
-          else
+          else if (!(ctx->flags & IPMI_INTERPRET_FLAGS_IGNORE_UNRECOGNIZED_EVENTS))
             (*sensor_state) = sensor_state_tmp;
         }
       else if (!(ctx->flags & IPMI_INTERPRET_FLAGS_IGNORE_UNRECOGNIZED_EVENTS))

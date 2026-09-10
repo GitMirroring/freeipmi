@@ -1,5 +1,10 @@
 2026-09-10 Albert Chu <chu11@llnl.gov>
 
+	* libfreeipmi/interpret/ipmi-interpret.c (_get_sensor_state): Preserve
+	the worst standard sensor state when applying an OEM interpretation.
+
+2026-09-10 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/sensor-read/ipmi-sensor-read.c
 	(ipmi_sensor_read_ctx_create, ipmi_sensor_read): Initialize and update
 	the sensor read error state on all return paths.
