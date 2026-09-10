@@ -2018,7 +2018,7 @@ api_lan_close_session (ipmi_ctx_t ctx)
   if (!(obj_cmd_rs = fiid_obj_create (tmpl_cmd_close_session_rs)))
     {
       API_ERRNO_TO_API_ERRNUM (ctx, errno);
-      return (-1);
+      goto cleanup;
     }
 
   if (fill_cmd_close_session (ctx->io.outofband.session_id,
@@ -4318,7 +4318,7 @@ api_lan_2_0_close_session (ipmi_ctx_t ctx)
   if (!(obj_cmd_rs = fiid_obj_create (tmpl_cmd_close_session_rs)))
     {
       API_ERRNO_TO_API_ERRNUM (ctx, errno);
-      return (-1);
+      goto cleanup;
     }
 
   if (fill_cmd_close_session (ctx->io.outofband.managed_system_session_id,
