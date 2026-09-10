@@ -185,9 +185,9 @@ _check_session_sequence_number (uint32_t session_sequence_number,
   /* Check if sequence number is greater than highest received and is
    * within range
    */
-  if ((*highest_received_sequence_number) > (IPMI_SEQUENCE_NUMBER_MAX - IPMI_SEQUENCE_NUMBER_WINDOW_DEFAULT))
+  if ((*highest_received_sequence_number) > (IPMI_SEQUENCE_NUMBER_MAX - sequence_number_window))
     {
-      wrap_val = IPMI_SEQUENCE_NUMBER_WINDOW_DEFAULT - (IPMI_SEQUENCE_NUMBER_MAX - (*highest_received_sequence_number)) - 1;
+      wrap_val = sequence_number_window - (IPMI_SEQUENCE_NUMBER_MAX - (*highest_received_sequence_number)) - 1;
 
       /* In IPMI 2.0, sequence number 0 isn't possible, so adjust wrap_val */
       if (ipmi_2_0_flag)
@@ -216,7 +216,7 @@ _check_session_sequence_number (uint32_t session_sequence_number,
   else
     {
       if (session_sequence_number > (*highest_received_sequence_number)
-          && (session_sequence_number - (*highest_received_sequence_number)) <= IPMI_SEQUENCE_NUMBER_WINDOW_DEFAULT)
+          && (session_sequence_number - (*highest_received_sequence_number)) <= sequence_number_window)
         {
           shift_num = (session_sequence_number - (*highest_received_sequence_number));
           (*highest_received_sequence_number) = session_sequence_number;
@@ -229,9 +229,9 @@ _check_session_sequence_number (uint32_t session_sequence_number,
   /* Check if sequence number is lower than highest received, is
    * within range, and hasn't been seen yet
    */
-  if ((*highest_received_sequence_number) < IPMI_SEQUENCE_NUMBER_WINDOW_DEFAULT)
+  if ((*highest_received_sequence_number) < sequence_number_window)
     {
-      wrap_val = IPMI_SEQUENCE_NUMBER_MAX - (IPMI_SEQUENCE_NUMBER_WINDOW_DEFAULT - (*highest_received_sequence_number)) + 1;
+      wrap_val = IPMI_SEQUENCE_NUMBER_MAX - (sequence_number_window - (*highest_received_sequence_number)) + 1;
 
       /* In IPMI 2.0, sequence number 0 isn't possible, so adjust wrap_val */
       if (ipmi_2_0_flag)
@@ -261,7 +261,7 @@ _check_session_sequence_number (uint32_t session_sequence_number,
   else
     {
       if (session_sequence_number < (*highest_received_sequence_number)
-          && session_sequence_number >= ((*highest_received_sequence_number) - IPMI_SEQUENCE_NUMBER_WINDOW_DEFAULT))
+          && session_sequence_number >= ((*highest_received_sequence_number) - sequence_number_window))
         {
           shift_num = (*highest_received_sequence_number) - session_sequence_number;
 
