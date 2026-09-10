@@ -23,6 +23,9 @@
 extern "C" {
 #endif
 
+#include <stdint.h>
+#include <freeipmi/sdr/ipmi-sdr.h>
+
 /*
  * Intel Node Manager
  *
