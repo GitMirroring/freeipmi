@@ -1,5 +1,10 @@
 2026-09-10 Albert Chu <chu11@llnl.gov>
 
+	* libfreeipmi/include/freeipmi/record-format/ipmi-sel-record-format.h:
+	Remove declarations for undefined legacy SEL templates.
+
+2026-09-10 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/include/freeipmi/cmds/ipmi-sensor-cmds.h
 	(tmpl_cmd_get_sensor_event_status_discrete_rs): Correct the exported
 	template declaration's spelling.

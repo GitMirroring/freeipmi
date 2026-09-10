@@ -85,10 +85,6 @@ extern fiid_template_t tmpl_sel_system_event_record_discrete_previous_state_seve
 extern fiid_template_t tmpl_sel_timestamped_oem_record;
 extern fiid_template_t tmpl_sel_non_timestamped_oem_record;
 
-extern fiid_template_t tmpl_threshold_event_data;
-extern fiid_template_t tmpl_discrete_event_data;
-extern fiid_template_t tmpl_oem_event_data;
-
 #ifdef __cplusplus
 }
 #endif
