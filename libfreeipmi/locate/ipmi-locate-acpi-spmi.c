@@ -1518,8 +1518,10 @@ _ipmi_acpi_get_firmware_table (ipmi_locate_ctx_t ctx,
                                          table_instance,
                                          &acpi_table,
                                          &acpi_table_length) != 0))
-        LOCATE_SET_ERRNUM (ctx, IPMI_LOCATE_ERR_SYSTEM_ERROR);
-      goto cleanup;
+        {
+          LOCATE_SET_ERRNUM (ctx, IPMI_LOCATE_ERR_SYSTEM_ERROR);
+          goto cleanup;
+        }
     }
 
   if (!acpi_table)

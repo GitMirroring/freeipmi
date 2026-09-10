@@ -1,5 +1,11 @@
 2026-09-10 Albert Chu <chu11@llnl.gov>
 
+	* libfreeipmi/locate/ipmi-locate-acpi-spmi.c
+	(_ipmi_acpi_get_firmware_table): Keep a firmware table retrieved through
+	the /dev/mem fallback.
+
+2026-09-10 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/record-format/ipmi-fru-dimmspd-record-format.c,
 	libfreeipmi/include/freeipmi/templates/
 	ipmi-fru-dimmspd-record-format-templates.h: Give the final DDR4 LRDIMM
