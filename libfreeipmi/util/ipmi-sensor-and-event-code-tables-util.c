@@ -229,7 +229,7 @@ _strcat_pef_action (char *buf, unsigned int buflen, uint8_t flag, int str_len, i
       if (str_len)
         len_temp += strlen (_ipmi_event_message_separator);
 
-      if ((str_len + len_temp) > buflen)
+      if ((str_len + len_temp) >= buflen)
         {
           SET_ERRNO (ENOSPC);
           return (-1);
