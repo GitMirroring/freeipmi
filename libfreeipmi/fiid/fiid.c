@@ -1126,6 +1126,12 @@ fiid_obj_copy (fiid_obj_t src_obj, fiid_template_t alt_tmpl)
   if (!src_obj || src_obj->magic != FIID_OBJ_MAGIC)
     goto cleanup;
 
+  if (!alt_tmpl)
+    {
+      src_obj->errnum = FIID_ERR_PARAMETERS;
+      goto cleanup;
+    }
+
   if ((data_len = _fiid_template_len_bytes (alt_tmpl, &field_data_len)) < 0)
     goto cleanup;
 
