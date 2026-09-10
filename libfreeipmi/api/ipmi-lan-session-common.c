@@ -1490,7 +1490,7 @@ api_lan_cmd_wrapper_ipmb (ipmi_ctx_t ctx,
                                           intf_flags)) < 0)
         {
           API_ERRNO_TO_API_ERRNUM (ctx, errno);
-          return (-1);
+          goto cleanup;
         }
 
       if (!ret)
@@ -3100,7 +3100,7 @@ api_lan_2_0_cmd_wrapper (ipmi_ctx_t ctx,
                                                intf_flags)) < 0)
         {
           API_ERRNO_TO_API_ERRNUM (ctx, errno);
-          return (-1);
+          goto cleanup;
         }
 
       if (!ret)
@@ -3309,7 +3309,7 @@ api_lan_2_0_cmd_wrapper_ipmb (ipmi_ctx_t ctx,
                                                intf_flags)) < 0)
         {
           API_ERRNO_TO_API_ERRNUM (ctx, errno);
-          return (-1);
+          goto cleanup;
         }
 
       if (!ret)

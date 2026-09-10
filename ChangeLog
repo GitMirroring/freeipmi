@@ -1,5 +1,12 @@
 2026-09-10 Albert Chu <chu11@llnl.gov>
 
+	* libfreeipmi/api/ipmi-lan-session-common.c
+	(api_lan_cmd_wrapper_ipmb, api_lan_2_0_cmd_wrapper,
+	api_lan_2_0_cmd_wrapper_ipmb): Run packet-unassembly errors through
+	the normal cleanup paths.
+
+2026-09-10 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/api/ipmi-lan-cmds-api.c,
 	libfreeipmi/include/freeipmi/api/ipmi-lan-cmds-api.h
 	(ipmi_cmd_set_lan_configuration_parameters_vlan_priority): Use the
