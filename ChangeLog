@@ -1,5 +1,11 @@
 2026-09-10 Albert Chu <chu11@llnl.gov>
 
+	* libfreeipmi/cmds/ipmi-fru-inventory-device-cmds.c
+	(fill_cmd_read_fru_data, fill_cmd_write_fru_data): Reject the reserved
+	FRU device ID.
+
+2026-09-10 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/include/freeipmi/spec/oem/
 	ipmi-cmd-oem-wistron-spec.h: Correct the synchronize chassis service
 	tag macro name.

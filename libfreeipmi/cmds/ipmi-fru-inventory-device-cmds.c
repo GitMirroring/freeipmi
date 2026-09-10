@@ -126,7 +126,8 @@ fill_cmd_read_fru_data (uint8_t fru_device_id,
                         uint8_t count_to_read,
                         fiid_obj_t obj_cmd_rq)
 {
-  if (!fiid_obj_valid (obj_cmd_rq))
+  if (fru_device_id == IPMI_FRU_DEVICE_ID_RESERVED
+      || !fiid_obj_valid (obj_cmd_rq))
     {
       SET_ERRNO (EINVAL);
       return (-1);
@@ -153,8 +154,9 @@ fill_cmd_write_fru_data (uint8_t fru_device_id,
                          unsigned int data_to_write_len,
                          fiid_obj_t obj_cmd_rq)
 {
-  if ((data_to_write
-       && data_to_write_len > IPMI_FRU_DATA_MAX)
+  if (fru_device_id == IPMI_FRU_DEVICE_ID_RESERVED
+      || (data_to_write
+          && data_to_write_len > IPMI_FRU_DATA_MAX)
       || !fiid_obj_valid (obj_cmd_rq))
     {
       SET_ERRNO (EINVAL);
