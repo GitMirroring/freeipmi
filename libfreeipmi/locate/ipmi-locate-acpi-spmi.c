@@ -1240,9 +1240,11 @@ _ipmi_acpi_get_table_sysfs (ipmi_locate_ctx_t ctx,
     }
 
   *acpi_table = acpi_table_buf;
+  acpi_table_buf = NULL;
   rv = 0;
  cleanup:
   close (sysfs_acpi_fd);
+  free (acpi_table_buf);
   free (sysfs_path);
   return rv;
 }
