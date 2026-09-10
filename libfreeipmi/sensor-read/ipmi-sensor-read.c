@@ -461,6 +461,7 @@ ipmi_sensor_read (ipmi_sensor_read_ctx_t ctx,
   uint8_t reading_state, sensor_scanning;
   uint8_t local_sensor_reading_raw;
   unsigned int ctx_flags_orig;
+  int ctx_flags_changed = 0;
   int event_reading_type_code_class = 0;
 
   if (!ctx || ctx->magic != IPMI_SENSOR_READ_CTX_MAGIC)
@@ -604,6 +605,7 @@ ipmi_sensor_read (ipmi_sensor_read_ctx_t ctx,
       SENSOR_READ_SET_ERRNUM (ctx, IPMI_SENSOR_READ_ERR_INTERNAL_ERROR);
       goto cleanup;
     }
+  ctx_flags_changed = 1;
 
   /* IPMI Workaround
    *
@@ -692,6 +694,7 @@ ipmi_sensor_read (ipmi_sensor_read_ctx_t ctx,
       SENSOR_READ_SET_ERRNUM (ctx, IPMI_SENSOR_READ_ERR_INTERNAL_ERROR);
       goto cleanup;
     }
+  ctx_flags_changed = 0;
 
   if (FIID_OBJ_GET (obj_cmd_rs,
                     "reading_state",
@@ -989,6 +992,13 @@ ipmi_sensor_read (ipmi_sensor_read_ctx_t ctx,
     rv = 0;
 
  cleanup:
+  if (ctx_flags_changed)
+    {
+      int sensor_read_errnum = ctx->errnum;
+
+      ipmi_ctx_set_flags (ctx->ipmi_ctx, ctx_flags_orig);
+      ctx->errnum = sensor_read_errnum;
+    }
   fiid_obj_destroy (obj_cmd_rs);
   if (rv <= 0)
     free (tmp_sensor_reading);
