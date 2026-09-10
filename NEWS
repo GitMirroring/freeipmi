@@ -205,8 +205,9 @@ relied on previous expected output.
 Libraries:
 ----------
 
-o In libfreeipmi, fix typos in function names.
+o In libfreeipmi, fix typos in function names or template names.
   - ipmi_device_type_modifer_message() -> ipmi_device_type_modifier_message()
+  - tmpl_cmd_get_sensor_event_status_discerete_rs -> tmpl_cmd_get_sensor_event_status_discrete_rs
 o In libfreeipmi, fix typos in macro names.
   - IPMI_FRU_LANGUAGE_CODE_UKRANIAN -> IPMI_FRU_LANGUAGE_CODE_UKRAINIAN
   - IPMI_BMC_GLOBAL_ENALBES_DISABLED -> IPMI_BMC_GLOBAL_ENABLES_DISABLED
