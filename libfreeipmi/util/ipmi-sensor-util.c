@@ -154,6 +154,7 @@ ipmi_sensor_units_string (uint8_t sensor_units_percentage,
 {
   const char **sensor_units = NULL;
   int offset = 0;
+  int prefix_len = 0;
   int rv = -1;
 
   if (!IPMI_SDR_PERCENTAGE_VALID(sensor_units_percentage)
@@ -195,9 +196,13 @@ ipmi_sensor_units_string (uint8_t sensor_units_percentage,
         }
       else
         {
-          offset = snprintf (buf,
-                             buflen,
-                             "%% ");
+          prefix_len = snprintf (buf,
+                                 buflen,
+                                 "%% ");
+          if (prefix_len < 0)
+            return (-1);
+
+          offset = prefix_len;
           /* snprintf returns the length it would have written; clamp so
            * "buf + offset" and "buflen - offset" below stay in bounds if
            * the prefix was truncated.
@@ -219,7 +224,7 @@ ipmi_sensor_units_string (uint8_t sensor_units_percentage,
                      buflen - offset,
                      "%s",
                      sensor_units[sensor_base_unit_type]);
-      return (rv);
+      return (rv < 0 ? rv : prefix_len + rv);
     }
 
   if (sensor_units_rate != IPMI_SENSOR_RATE_UNIT_NONE)
@@ -241,7 +246,7 @@ ipmi_sensor_units_string (uint8_t sensor_units_percentage,
                        "%s %s",
                        sensor_units[sensor_base_unit_type],
                        ipmi_sensor_rate_units[sensor_units_rate]);
-      return (rv);
+      return (rv < 0 ? rv : prefix_len + rv);
     }
 
   /* else sensor_units_modifier != IPMI_SDR_MODIFIER_UNIT_NONE */
@@ -270,7 +275,7 @@ ipmi_sensor_units_string (uint8_t sensor_units_percentage,
                        sensor_units[sensor_modifier_unit_type]);
     }
 
-  return (rv);
+  return (rv < 0 ? rv : prefix_len + rv);
 }
 
 int
@@ -555,4 +560,3 @@ ipmi_sensor_decode_resolution (int8_t r_exponent,
   *value = dval;
   return (0);
 }
-
