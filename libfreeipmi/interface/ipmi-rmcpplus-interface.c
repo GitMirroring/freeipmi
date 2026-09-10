@@ -1163,10 +1163,22 @@ _construct_session_trlr_authentication_code (uint8_t integrity_algorithm,
       if (authentication_code_data && authentication_code_data_len)
         memcpy (pwbuf, authentication_code_data, authentication_code_data_len);
 
+      if (IPMI_2_0_MAX_PASSWORD_LENGTH > (sizeof (hash_data) - hash_data_len))
+        {
+          SET_ERRNO (EMSGSIZE);
+          goto cleanup;
+        }
+
       memcpy (hash_data + hash_data_len,
               pwbuf,
               IPMI_2_0_MAX_PASSWORD_LENGTH);
       hash_data_len += IPMI_2_0_MAX_PASSWORD_LENGTH;
+    }
+
+  if (pkt_data_len > (sizeof (hash_data) - hash_data_len))
+    {
+      SET_ERRNO (EMSGSIZE);
+      goto cleanup;
     }
 
   memcpy (hash_data + hash_data_len, pkt_data, pkt_data_len);
@@ -1174,6 +1186,12 @@ _construct_session_trlr_authentication_code (uint8_t integrity_algorithm,
 
   if (integrity_algorithm == IPMI_INTEGRITY_ALGORITHM_MD5_128)
     {
+      if (IPMI_2_0_MAX_PASSWORD_LENGTH > (sizeof (hash_data) - hash_data_len))
+        {
+          SET_ERRNO (EMSGSIZE);
+          goto cleanup;
+        }
+
       memcpy (hash_data + hash_data_len,
               pwbuf,
               IPMI_2_0_MAX_PASSWORD_LENGTH);

@@ -1,5 +1,11 @@
 2026-09-10 Albert Chu <chu11@llnl.gov>
 
+	* libfreeipmi/interface/ipmi-rmcpplus-interface.c
+	(_construct_session_trlr_authentication_code): Check the remaining hash
+	buffer capacity before copying each packet or password segment.
+
+2026-09-10 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/include/Makefile.am: Install ipmi-cmd-oem-spec.h as a
 	public compatibility header.
 
