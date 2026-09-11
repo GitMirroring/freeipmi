@@ -5682,16 +5682,16 @@ ipmi_oem_intelnm_set_node_manager_alert_destination (ipmi_oem_state_data_t *stat
   else
     {
       if (destinationselector_specified)
-        ret = ipmi_cmd_oem_intel_node_manager_set_node_manager_alert_destination_ipmb (state_data->ipmi_ctx,
-                                                                                       target_channel_number,
-                                                                                       target_slave_address,
-                                                                                       target_lun,
-                                                                                       channelnumber,
-                                                                                       registerX,
-                                                                                       destinationselector,
-                                                                                       alertstringselector,
-                                                                                       sendalertstring,
-                                                                                       obj_cmd_rs);
+        ret = ipmi_cmd_oem_intel_node_manager_set_node_manager_alert_destination_lan (state_data->ipmi_ctx,
+                                                                                      target_channel_number,
+                                                                                      target_slave_address,
+                                                                                      target_lun,
+                                                                                      channelnumber,
+                                                                                      registerX,
+                                                                                      destinationselector,
+                                                                                      alertstringselector,
+                                                                                      sendalertstring,
+                                                                                      obj_cmd_rs);
       else
         ret = ipmi_cmd_oem_intel_node_manager_set_node_manager_alert_destination_ipmb (state_data->ipmi_ctx,
                                                                                        target_channel_number,

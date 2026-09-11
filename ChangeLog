@@ -1,6 +1,12 @@
 2026-09-11 Albert Chu <chu11@llnl.gov>
 
 	* ipmi-oem/ipmi-oem-intelnm.c
+	(ipmi_oem_intelnm_set_node_manager_alert_destination): Encode LAN alert
+	destinations with the LAN request layout.
+
+2026-09-11 Albert Chu <chu11@llnl.gov>
+
+	* ipmi-oem/ipmi-oem-intelnm.c
 	(ipmi_oem_intelnm_set_node_manager_policy_suspend_periods): Compare
 	suspend-period times only when the period was specified.
 
