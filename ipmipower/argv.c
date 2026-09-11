@@ -72,10 +72,10 @@ static char *_nextargv(char **strp, char *ignore)
     int len;
     char *cpy = NULL;
 
-    while (*str && (isspace(*str) || strchr(ignore, *str)))
+    while (*str && (isspace((unsigned char)*str) || strchr(ignore, *str)))
         str++;
     word = str;
-    while (*str && !(isspace(*str) || strchr(ignore, *str)))
+    while (*str && !(isspace((unsigned char)*str) || strchr(ignore, *str)))
         str++;
     len = str - word;
 
@@ -98,11 +98,11 @@ static int _sizeargv(char *str, char *ignore)
     int count = 0;
 
     do {
-        while (*str && (isspace(*str) || strchr(ignore, *str)))
+        while (*str && (isspace((unsigned char)*str) || strchr(ignore, *str)))
             str++;
         if (*str)
             count++;
-        while (*str && !(isspace(*str) || strchr(ignore, *str)))
+        while (*str && !(isspace((unsigned char)*str) || strchr(ignore, *str)))
             str++;
     } while (*str);
 

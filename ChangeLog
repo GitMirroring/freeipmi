@@ -1,5 +1,10 @@
 2026-09-11 Albert Chu <chu11@llnl.gov>
 
+	* ipmipower/argv.c (_nextargv, _sizeargv): Convert prompt bytes to unsigned
+	char before classifying whitespace.
+
+2026-09-11 Albert Chu <chu11@llnl.gov>
+
 	* ipmipower/ipmipower_connection.c (_connection_setup): Use common
 	cleanup when socket creation reaches the file-descriptor limit.
 
