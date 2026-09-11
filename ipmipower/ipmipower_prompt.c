@@ -485,6 +485,7 @@ _cmd_power_specific_nodes (char **argv, ipmipower_power_cmd_t cmd)
   fi_hostlist_iterator_t h2itr = NULL;
   char *hstr = NULL;
   char *h2str = NULL;
+  int nodes_queued = 0;
 
   assert (argv);
   assert (IPMIPOWER_POWER_CMD_VALID (cmd));
@@ -586,11 +587,13 @@ _cmd_power_specific_nodes (char **argv, ipmipower_power_cmd_t cmd)
                     }
                   ipmipower_connection_clear (&ics[i]);
                   ipmipower_powercmd_queue (cmd, &ics[i], h2str_extra_arg);
+                  nodes_queued++;
                 }
               else
                 {
                   ipmipower_connection_clear (&ics[i]);
                   ipmipower_powercmd_queue (cmd, &ics[i], NULL);
+                  nodes_queued++;
                 }
             }
 
@@ -605,6 +608,9 @@ _cmd_power_specific_nodes (char **argv, ipmipower_power_cmd_t cmd)
       h2itr = NULL;
       h2 = NULL;
     }
+
+  if (!nodes_queued)
+    ipmipower_output_finish ();
 
  cleanup:
   fi_hostlist_iterator_destroy (h2itr);

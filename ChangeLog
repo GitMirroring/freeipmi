@@ -1,5 +1,10 @@
 2026-09-11 Albert Chu <chu11@llnl.gov>
 
+	* ipmipower/ipmipower_prompt.c (_cmd_power_specific_nodes): Flush
+	consolidated errors when every requested host is rejected before queuing.
+
+2026-09-11 Albert Chu <chu11@llnl.gov>
+
 	* ipmipower/ipmipower_prompt.c (_cmd_set_unsigned_int,
 	ipmipower_prompt_process_cmdline): Accept positive interactive numeric
 	settings and restrict ping percentages to 100 percent.
