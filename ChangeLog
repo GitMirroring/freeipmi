@@ -1,5 +1,10 @@
 2026-09-11 Albert Chu <chu11@llnl.gov>
 
+	* ipmi-config/ipmi-config.c (_ipmi_config): Preserve requested
+	front-panel button states when core and chassis categories are combined.
+
+2026-09-11 Albert Chu <chu11@llnl.gov>
+
 	* ipmi-config/ipmi-config-argp.c (_ipmi_config_keypair_parse_string):
 	Reject whitespace-only section and key names after trimming them.
 

@@ -402,7 +402,7 @@ _ipmi_config (pstdout_state_t pstate,
             }
         }
     }
-  else if (prog_data->args->category_mask & IPMI_CONFIG_CATEGORY_MASK_CHASSIS)
+  if (prog_data->args->category_mask & IPMI_CONFIG_CATEGORY_MASK_CHASSIS)
     {
       /* Special case: There may not be a way to checkout the front panel
        * buttons, so we have to store before hand it if we intend to
