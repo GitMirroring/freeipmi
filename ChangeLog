@@ -1,5 +1,10 @@
 2026-09-11 Albert Chu <chu11@llnl.gov>
 
+	* ipmipower/ipmipower_prompt.c (_cmd_power_specific_nodes): Free each
+	outer host-list string after processing its expanded host expression.
+
+2026-09-11 Albert Chu <chu11@llnl.gov>
+
 	* ipmipower/ipmipower_prompt.c (_cmd_power_specific_nodes): Flush
 	consolidated errors when every requested host is rejected before queuing.
 

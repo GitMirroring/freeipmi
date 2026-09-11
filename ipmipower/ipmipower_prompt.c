@@ -607,6 +607,8 @@ _cmd_power_specific_nodes (char **argv, ipmipower_power_cmd_t cmd)
       fi_hostlist_destroy (h2);
       h2itr = NULL;
       h2 = NULL;
+      free (hstr);
+      hstr = NULL;
     }
 
   if (!nodes_queued)
