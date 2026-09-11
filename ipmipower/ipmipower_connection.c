@@ -138,6 +138,7 @@ _connection_setup (struct ipmipower_connection *ic, const char *hostname)
   struct addrinfo ai_hints, *ai_res = NULL, *ai = NULL;
   int rv = -1;
   int ret;
+  int saved_errno = 0;
 
   assert (ic);
   assert (hostname);
@@ -317,7 +318,8 @@ _connection_setup (struct ipmipower_connection *ic, const char *hostname)
 	  if (errno == EMFILE)
 	    {
 	      IPMIPOWER_DEBUG (("file descriptor limit reached"));
-	      return (-1);
+	      saved_errno = errno;
+	      goto cleanup;
 	    }
 	  /* some other error, try the next addrinfo */
 	  continue;
@@ -329,8 +331,10 @@ _connection_setup (struct ipmipower_connection *ic, const char *hostname)
 	  if (errno == EMFILE)
 	    {
 	      IPMIPOWER_DEBUG (("file descriptor limit reached"));
+	      saved_errno = errno;
 	      close (ic->ipmi_fd);
-	      return (-1);
+	      ic->ipmi_fd = -1;
+	      goto cleanup;
 	    }
 	  /* some other error, close the ipmi_fd we just opened and try
 	   * the next addrinfo */
@@ -394,6 +398,8 @@ _connection_setup (struct ipmipower_connection *ic, const char *hostname)
   free (hostname_first_parse_copy);
   free (hostname_second_parse_copy);
   free (port_second_parse_copy);
+  if (saved_errno)
+    errno = saved_errno;
   return (rv);
 }
 

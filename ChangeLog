@@ -1,5 +1,10 @@
 2026-09-11 Albert Chu <chu11@llnl.gov>
 
+	* ipmipower/ipmipower_connection.c (_connection_setup): Use common
+	cleanup when socket creation reaches the file-descriptor limit.
+
+2026-09-11 Albert Chu <chu11@llnl.gov>
+
 	* ipmipower/ipmipower_prompt.c (_cmd_power_specific_nodes): Free each
 	outer host-list string after processing its expanded host expression.
 
