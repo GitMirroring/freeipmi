@@ -1,5 +1,11 @@
 2026-09-10 Albert Chu <chu11@llnl.gov>
 
+	* libipmimonitoring/ipmi_monitoring_sdr_cache.c
+	(ipmi_monitoring_sdr_cache_flush): Destroy the temporary SDR context after
+	a successful cache flush.
+
+2026-09-10 Albert Chu <chu11@llnl.gov>
+
 	* libfreeipmi/libcommon/ipmi-crypt-gcrypt.c (_cipher_crypt): Retain the
 	actual gcrypt error returned when opening a cipher handle.
 

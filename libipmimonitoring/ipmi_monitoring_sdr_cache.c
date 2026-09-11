@@ -393,6 +393,8 @@ ipmi_monitoring_sdr_cache_flush (ipmi_monitoring_ctx_t c,
   if (_ipmi_monitoring_sdr_cache_delete (c, hostname, filename) < 0)
     goto cleanup;
 
+  ipmi_sdr_ctx_destroy (c->sdr_ctx);
+  c->sdr_ctx = NULL;
   return (0);
 
  cleanup:
