@@ -4910,7 +4910,8 @@ ipmi_oem_intelnm_set_node_manager_policy_suspend_periods (ipmi_oem_state_data_t 
           goto cleanup;
         }
 
-      if (policy_suspend_stop_time[i] < policy_suspend_start_time[i])
+      if (policy_suspend_start_time_specified[i]
+          && policy_suspend_stop_time[i] < policy_suspend_start_time[i])
         {
           pstdout_fprintf (state_data->pstate,
                            stderr,
