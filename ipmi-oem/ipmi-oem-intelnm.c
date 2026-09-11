@@ -2588,7 +2588,7 @@ _ipmi_oem_intelnm_get_node_manager_policy_common (ipmi_oem_state_data_t *state_d
       policy_target_limit_units_str = " W";
       break;
     case IPMI_OEM_INTEL_NODE_MANAGER_POLICY_TRIGGER_TYPE_MISSING_POWER_READING_TIMEOUT:
-      policy_target_limit_units_str = "%%";
+      policy_target_limit_units_str = "%";
       break;
     case IPMI_OEM_INTEL_NODE_MANAGER_POLICY_TRIGGER_TYPE_TIME_AFTER_PLATFORM_RESET_TRIGGER:
       policy_target_limit_units_str = " W";

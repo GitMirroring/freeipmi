@@ -1,6 +1,12 @@
 2026-09-11 Albert Chu <chu11@llnl.gov>
 
 	* ipmi-oem/ipmi-oem-intelnm.c
+	(ipmi_oem_intelnm_get_node_manager_policy): Print a single percent sign
+	for missing-power-reading policy limits.
+
+2026-09-11 Albert Chu <chu11@llnl.gov>
+
+	* ipmi-oem/ipmi-oem-intelnm.c
 	(ipmi_oem_intelnm_get_node_manager_statistics): Preserve tenths in all
 	volumetric-airflow statistics.
 
