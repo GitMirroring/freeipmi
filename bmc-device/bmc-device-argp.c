@@ -162,7 +162,7 @@ cmdline_parse (int key, char *arg, struct argp_state *state)
 {
   struct bmc_device_arguments *cmd_args;
   char *endptr;
-  int tmp;
+  long tmp;
 
   assert (state);
 
@@ -350,7 +350,7 @@ cmdline_parse (int key, char *arg, struct argp_state *state)
           fprintf (stderr, "invalid device id\n");
           exit (EXIT_FAILURE);
         }
-      cmd_args->device_id = tmp;
+      cmd_args->device_id = (uint8_t)tmp;
       cmd_args->device_id_set = 1;
       break;
     case VERBOSE_KEY:

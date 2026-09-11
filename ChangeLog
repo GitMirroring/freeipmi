@@ -1,5 +1,10 @@
 2026-09-11 Albert Chu <chu11@llnl.gov>
 
+	* bmc-device/bmc-device-argp.c (cmdline_parse): Validate FRU device IDs
+	before narrowing them to the command field type.
+
+2026-09-11 Albert Chu <chu11@llnl.gov>
+
 	* man/ipmi-chassis.8.pre.in: Use the current chassis-status option in
 	examples.
 
