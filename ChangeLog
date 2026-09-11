@@ -1,5 +1,11 @@
 2026-09-11 Albert Chu <chu11@llnl.gov>
 
+	* ipmipower/ipmipower_prompt.c (_cmd_set_unsigned_int,
+	ipmipower_prompt_process_cmdline): Accept positive interactive numeric
+	settings and restrict ping percentages to 100 percent.
+
+2026-09-11 Albert Chu <chu11@llnl.gov>
+
 	* ipmi-config/ipmi-config.c (_ipmi_config): Preserve requested
 	front-panel button states when core and chassis categories are combined.
 

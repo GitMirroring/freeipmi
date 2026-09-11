@@ -1103,11 +1103,11 @@ _cmd_set_unsigned_int (char **argv,
         ipmipower_cbuf_printf (ttyout,
                                "invalid %s input\n",
                                str);
-      else if (allow_zero && !temp)
+      else if (temp || allow_zero)
         {
           *value = temp;
           ipmipower_cbuf_printf (ttyout,
-                                 "%s is now %d\n",
+                                 "%s is now %u\n",
                                  str,
                                  *value);
         }
@@ -1359,10 +1359,12 @@ ipmipower_prompt_process_cmdline (void)
                                        "ping-packet-count",
                                        1);
               else if (!strcmp (argv[0], "ping-percent"))
-                _cmd_set_unsigned_int (argv,
-                                       &cmd_args.ping_percent,
-                                       "ping-percent",
-                                       1);
+                _cmd_set_unsigned_int_ranged (argv,
+                                              &cmd_args.ping_percent,
+                                              "ping-percent",
+                                              1,
+                                              0,
+                                              100);
               else if (!strcmp (argv[0], "ping-consec-count"))
                 _cmd_set_unsigned_int_ranged (argv,
                                               &cmd_args.ping_consec_count,
