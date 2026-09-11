@@ -663,7 +663,9 @@ _ipmi_config_args_validate (struct ipmi_config_arguments *cmd_args)
             {
               int fd;
 
-              if ((fd = open (cmd_args->filename, O_CREAT, 0644)) < 0)
+              if ((fd = open (cmd_args->filename,
+                              O_WRONLY | O_CREAT,
+                              S_IRUSR | S_IWUSR)) < 0)
                 {
                   fprintf (stderr,
                            "Cannot open '%s': %s\n",

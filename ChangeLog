@@ -1,5 +1,11 @@
 2026-09-11 Albert Chu <chu11@llnl.gov>
 
+	* ipmi-config/ipmi-config.c, ipmi-config/ipmi-config-argp.c: Create
+	checkout files with owner-only permissions and restrict existing output
+	files before writing configuration data.
+
+2026-09-11 Albert Chu <chu11@llnl.gov>
+
 	* ipmi-config/ipmi-config-category-dcmi-dcmi-conf-section.c
 	(_set_power_limit): Require all DCMI power-limit values before using the
 	no-power-limit fallback.

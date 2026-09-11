@@ -25,6 +25,14 @@
 #if STDC_HEADERS
 #include <string.h>
 #endif /* STDC_HEADERS */
+#include <sys/types.h>
+#include <sys/stat.h>
+#if HAVE_FCNTL_H
+#include <fcntl.h>
+#endif /* HAVE_FCNTL_H */
+#if HAVE_UNISTD_H
+#include <unistd.h>
+#endif /* HAVE_UNISTD_H */
 #include <assert.h>
 #include <errno.h>
 
@@ -182,6 +190,8 @@ _ipmi_config (pstdout_state_t pstate,
     {
       if (prog_data->args->filename)
         {
+          int fd;
+
           if (prog_data->hosts_count > 1)
             {
               pstdout_fprintf (pstate,
@@ -190,9 +200,26 @@ _ipmi_config (pstdout_state_t pstate,
               goto cleanup;
             }
 
-          if (!(fp = fopen (prog_data->args->filename, "w")))
+          if ((fd = open (prog_data->args->filename,
+                          O_WRONLY | O_CREAT | O_TRUNC,
+                          S_IRUSR | S_IWUSR)) < 0)
             {
-              pstdout_perror (pstate, "fopen");
+              pstdout_perror (pstate, "open");
+              goto cleanup;
+            }
+
+          /* open() preserves the mode of an existing file. */
+          if (fchmod (fd, S_IRUSR | S_IWUSR) < 0)
+            {
+              pstdout_perror (pstate, "fchmod");
+              close (fd);
+              goto cleanup;
+            }
+
+          if (!(fp = fdopen (fd, "w")))
+            {
+              pstdout_perror (pstate, "fdopen");
+              close (fd);
               goto cleanup;
             }
           file_opened++;
