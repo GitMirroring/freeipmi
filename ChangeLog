@@ -1,5 +1,11 @@
 2026-09-11 Albert Chu <chu11@llnl.gov>
 
+	* ipmi-oem/ipmi-oem-quanta.c
+	(ipmi_oem_quanta_get_processor_information): Stop processor enumeration
+	before the one-byte index can wrap.
+
+2026-09-11 Albert Chu <chu11@llnl.gov>
+
 	* ipmi-oem/ipmi-oem-intelnm.c
 	(ipmi_oem_intelnm_set_node_manager_alert_destination): Encode LAN alert
 	destinations with the LAN request layout.

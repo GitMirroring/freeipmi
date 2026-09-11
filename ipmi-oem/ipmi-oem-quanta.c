@@ -629,6 +629,9 @@ ipmi_oem_quanta_get_processor_information (ipmi_oem_state_data_t *state_data)
                           processor_type_str,
                           (double)processor_mhz / 1000);
         }
+
+      if (processor_index == processor_index_max)
+        break;
     }
 
   rv = 0;
