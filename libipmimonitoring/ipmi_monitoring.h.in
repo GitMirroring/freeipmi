@@ -437,7 +437,7 @@ enum ipmi_monitoring_sensor_reading_flags
  * session_timeout_len
  *
  *   Specifies the session timeout length in milliseconds.  Pass <= 0
- *   to default to 60000 (60 seconds).
+ *   to default to 20000 (20 seconds).
  *
  * retransmission_timeout_len
  *
