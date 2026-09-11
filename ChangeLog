@@ -1,5 +1,11 @@
 2026-09-10 Albert Chu <chu11@llnl.gov>
 
+	* libipmimonitoring/ipmi_monitoring_bitmasks.h
+	(ipmi_monitoring_sensor_bitmask_threshold): Name upper-threshold bits as
+	at or above the threshold.
+
+2026-09-10 Albert Chu <chu11@llnl.gov>
+
 	* libipmimonitoring/ipmi_monitoring.h.in: Correct the documented default
 	session timeout.
 
