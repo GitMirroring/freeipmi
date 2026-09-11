@@ -767,7 +767,11 @@ _set_power_limit (ipmi_config_state_data_t *state_data,
   if (no_set_power_limit_flag)
     {
       struct ipmi_config_section *section;
-      struct ipmi_config_keyvalue *kv;
+      struct ipmi_config_keyvalue *power_limit_requested_kv;
+      struct ipmi_config_keyvalue *correction_time_limit_kv;
+      struct ipmi_config_keyvalue *sampling_period_kv;
+      struct ipmi_config_keyvalue *exception_actions_kv;
+      int num;
 
       section = state_data->sections;
       while (section)
@@ -781,25 +785,37 @@ _set_power_limit (ipmi_config_state_data_t *state_data,
       if (!section)
         goto cleanup;
 
-      if ((kv = ipmi_config_find_keyvalue (section, "Policy_Type")))
-        gpld->power_limit_requested = atoi (kv->value_input);
-
-      if ((kv = ipmi_config_find_keyvalue (section, "Policy_Enabled")))
-        gpld->correction_time_limit = strtoul (kv->value_input, NULL, 0);
-
-      if ((kv = ipmi_config_find_keyvalue (section, "Management_Application_Statistics_Sampling_Period")))
-        gpld->management_application_statistics_sampling_period = atoi (kv->value_input);
-
-      if ((kv = ipmi_config_find_keyvalue (section, "Exception_Actions")))
+      if (!(power_limit_requested_kv = ipmi_config_find_keyvalue (section,
+                                                                  "Power_Limit_Requested"))
+          || !(correction_time_limit_kv = ipmi_config_find_keyvalue (section,
+                                                                     "Correction_Time_Limit"))
+          || !(sampling_period_kv = ipmi_config_find_keyvalue (section,
+                                                               "Management_Application_Statistics_Sampling_Period"))
+          || !(exception_actions_kv = ipmi_config_find_keyvalue (section,
+                                                                 "Exception_Actions")))
         {
-          int num = exception_actions_number (kv->value_input);
-
-          if (num < 0)
-            /* previously checked for correctness, so no error check */
-            gpld->exception_actions = strtol (kv->value_input, NULL, 0);
-          else
-            gpld->exception_actions = num;
+          pstdout_fprintf (state_data->pstate,
+                           stderr,
+                           "All DCMI power limit values must be specified in section '%s'\n",
+                           section_name);
+          rv = IPMI_CONFIG_ERR_NON_FATAL_ERROR;
+          goto cleanup;
         }
+
+      gpld->power_limit_requested = atoi (power_limit_requested_kv->value_input);
+      gpld->correction_time_limit = strtoul (correction_time_limit_kv->value_input,
+                                             NULL,
+                                             0);
+      gpld->management_application_statistics_sampling_period = atoi (sampling_period_kv->value_input);
+
+      num = exception_actions_number (exception_actions_kv->value_input);
+      if (num < 0)
+        /* previously checked for correctness, so no error check */
+        gpld->exception_actions = strtol (exception_actions_kv->value_input,
+                                          NULL,
+                                          0);
+      else
+        gpld->exception_actions = num;
     }
 
   if (!(obj_cmd_rs = fiid_obj_create (tmpl_cmd_dcmi_set_power_limit_rs)))
