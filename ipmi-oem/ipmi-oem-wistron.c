@@ -1783,7 +1783,7 @@ ipmi_oem_wistron_set_ipv6_trap_settings (ipmi_oem_state_data_t *state_data)
 {
   uint32_t tmpvalue;
   char *endptr = NULL;
-  unsigned int indextmp;
+  unsigned long indextmp;
   uint8_t index;
   uint32_t ipv6snmptrapdestinationsetting;
   uint8_t destination_type;
@@ -1827,7 +1827,7 @@ ipmi_oem_wistron_set_ipv6_trap_settings (ipmi_oem_state_data_t *state_data)
       goto cleanup;
     }
 
-  index = indextmp;
+  index = (uint8_t)indextmp;
 
   /* now compare to the number of destinations */
 
@@ -2658,7 +2658,7 @@ ipmi_oem_wistron_set_dhcp_retry (ipmi_oem_state_data_t *state_data)
   uint8_t configuration_parameter_data[IPMI_OEM_MAX_BYTES];
   uint8_t lan_channel_number;
   char *endptr = NULL;
-  unsigned int value;
+  unsigned long value;
   uint8_t retry_count;
   uint8_t retry_interval;
   uint8_t retry_timeout;
@@ -2689,7 +2689,7 @@ ipmi_oem_wistron_set_dhcp_retry (ipmi_oem_state_data_t *state_data)
           goto cleanup;
         }
 
-      retry_count = value;
+      retry_count = (uint8_t)value;
     }
 
   errno = 0;
@@ -2707,7 +2707,7 @@ ipmi_oem_wistron_set_dhcp_retry (ipmi_oem_state_data_t *state_data)
       goto cleanup;
     }
 
-  retry_interval = value;
+  retry_interval = (uint8_t)value;
 
   errno = 0;
   value = strtoul (state_data->prog_data->args->oem_options[2], &endptr, 0);
@@ -2724,7 +2724,7 @@ ipmi_oem_wistron_set_dhcp_retry (ipmi_oem_state_data_t *state_data)
       goto cleanup;
     }
 
-  retry_timeout = value;
+  retry_timeout = (uint8_t)value;
 
   /* Wistron 5441/Dell Poweredge C6220
    *

@@ -425,7 +425,7 @@ ipmi_oem_intel_get_smtp_config (ipmi_oem_state_data_t *state_data)
   if (state_data->prog_data->args->oem_options_count)
     {
       char *endptr = NULL;
-      unsigned int temp;
+      unsigned long temp;
 
       errno = 0;
       temp = strtoul (state_data->prog_data->args->oem_options[0], &endptr, 10);
@@ -443,7 +443,7 @@ ipmi_oem_intel_get_smtp_config (ipmi_oem_state_data_t *state_data)
           goto cleanup;
         }
 
-      channel_numbers[0] = temp;
+      channel_numbers[0] = (uint8_t)temp;
       channel_numbers_count = 1;
     }
   else
@@ -870,7 +870,7 @@ ipmi_oem_intel_set_smtp_config (ipmi_oem_state_data_t *state_data)
   if (state_data->prog_data->args->oem_options_count)
     {
       char *endptr = NULL;
-      unsigned int temp;
+      unsigned long temp;
 
       errno = 0;
       temp = strtoul (state_data->prog_data->args->oem_options[0], &endptr, 10);
@@ -879,7 +879,7 @@ ipmi_oem_intel_set_smtp_config (ipmi_oem_state_data_t *state_data)
             || temp > UCHAR_MAX
             || !temp))
         {
-          channel_numbers[0] = temp;
+          channel_numbers[0] = (uint8_t)temp;
           channel_numbers_count = 1;
           load_channel_numbers = 0;
         }
@@ -1189,7 +1189,7 @@ ipmi_oem_intel_set_power_restore_delay (ipmi_oem_state_data_t *state_data)
 {
   uint8_t bytes_rq[IPMI_OEM_MAX_BYTES];
   uint8_t bytes_rs[IPMI_OEM_MAX_BYTES];
-  unsigned int tmp;
+  unsigned long tmp;
   char *endptr;
   uint16_t delay = 0;
   int rs_len;
@@ -1216,7 +1216,7 @@ ipmi_oem_intel_set_power_restore_delay (ipmi_oem_state_data_t *state_data)
       goto cleanup;
     }
 
-  delay = tmp;
+  delay = (uint16_t)tmp;
 
   /* Intel S2600JF/Appro 512X
    *

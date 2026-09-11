@@ -4611,7 +4611,7 @@ _parse_suspend_period_number (ipmi_oem_state_data_t *state_data,
                               const char *str,
                               unsigned int *suspend_period_number)
 {
-  unsigned int temp;
+  unsigned long temp;
   char *ptr = NULL;
 
   assert (state_data);
@@ -4638,7 +4638,7 @@ _parse_suspend_period_number (ipmi_oem_state_data_t *state_data,
       return (-1);
     }
 
-  (*suspend_period_number) = temp;
+  (*suspend_period_number) = (unsigned int)temp;
   return (0);
 }
 
@@ -4649,8 +4649,8 @@ _parse_suspend_period_time (ipmi_oem_state_data_t *state_data,
                             uint8_t *suspend_period_time)
 {
   char buf[IPMI_OEM_STR_BUFLEN + 1];
-  unsigned int hours;
-  unsigned int minutes;
+  unsigned long hours;
+  unsigned long minutes;
   char *minutes_ptr = NULL;
   char *ptr = NULL;
 
@@ -4709,7 +4709,7 @@ _parse_suspend_period_time (ipmi_oem_state_data_t *state_data,
     }
 
   /* encoded by dividing minutes since midnight by 6 */
-  (*suspend_period_time) = ((hours * 60) + minutes) / 6;
+  (*suspend_period_time) = (uint8_t)(((hours * 60) + minutes) / 6);
   return (0);
 }
 

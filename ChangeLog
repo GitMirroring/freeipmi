@@ -1,5 +1,13 @@
 2026-09-11 Albert Chu <chu11@llnl.gov>
 
+	* ipmi-oem/ipmi-oem-dell.c, ipmi-oem/ipmi-oem-intel.c,
+	ipmi-oem/ipmi-oem-intelnm.c, ipmi-oem/ipmi-oem-inventec.c,
+	ipmi-oem/ipmi-oem-quanta.c, ipmi-oem/ipmi-oem-thirdparty.c,
+	ipmi-oem/ipmi-oem-wistron.c: Validate strtoul results before narrowing
+	them to command field types.
+
+2026-09-11 Albert Chu <chu11@llnl.gov>
+
 	* ipmi-oem/ipmi-oem-quanta.c
 	(ipmi_oem_quanta_get_processor_information): Stop processor enumeration
 	before the one-byte index can wrap.

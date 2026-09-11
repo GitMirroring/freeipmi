@@ -497,7 +497,7 @@ ipmi_oem_quanta_get_processor_information (ipmi_oem_state_data_t *state_data)
   if (state_data->prog_data->args->oem_options_count)
     {
       char *endptr = NULL;
-      unsigned int temp;
+      unsigned long temp;
 
       errno = 0;
       temp = strtoul (state_data->prog_data->args->oem_options[0], &endptr, 10);
@@ -515,7 +515,7 @@ ipmi_oem_quanta_get_processor_information (ipmi_oem_state_data_t *state_data)
           goto cleanup;
         }
 
-      processor_index_init = temp;
+      processor_index_init = (uint8_t)temp;
 
       processor_index_max = processor_index_init;
     }

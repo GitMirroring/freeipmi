@@ -2143,7 +2143,7 @@ ipmi_oem_thirdparty_set_sol_idle_timeout (ipmi_oem_state_data_t *state_data)
 
   if (strcasecmp (state_data->prog_data->args->oem_options[0], "none"))
     {
-      unsigned int temp;
+      unsigned long temp;
       char *endptr = NULL;
 
       errno = 0;
@@ -2162,7 +2162,7 @@ ipmi_oem_thirdparty_set_sol_idle_timeout (ipmi_oem_state_data_t *state_data)
           goto cleanup;
         }
 
-      timeout = temp;
+      timeout = (uint16_t)temp;
     }
   else
     timeout = 0;

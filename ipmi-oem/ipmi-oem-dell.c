@@ -5713,7 +5713,7 @@ ipmi_oem_dell_get_instantaneous_power_consumption_data (ipmi_oem_state_data_t *s
   else
     {
       char *endptr = NULL;
-      unsigned int temp;
+      unsigned long temp;
 
       errno = 0;
       temp = strtoul (state_data->prog_data->args->oem_options[0], &endptr, 10);
@@ -5730,7 +5730,7 @@ ipmi_oem_dell_get_instantaneous_power_consumption_data (ipmi_oem_state_data_t *s
           goto cleanup;
         }
 
-      bytes_rq[2] = temp;
+      bytes_rq[2] = (uint8_t)temp;
     }
 
   if ((rs_len = ipmi_cmd_raw (state_data->ipmi_ctx,
@@ -6458,7 +6458,7 @@ ipmi_oem_dell_set_power_capacity (ipmi_oem_state_data_t *state_data)
   uint16_t power_capacity;
   uint16_t maximum_power_consumption;
   uint16_t minimum_power_consumption;
-  unsigned int temp;
+  unsigned long temp;
   char *endptr = NULL;
   int rv = -1;
 
@@ -6517,7 +6517,7 @@ ipmi_oem_dell_set_power_capacity (ipmi_oem_state_data_t *state_data)
                        state_data->prog_data->args->oem_options[0]);
       goto cleanup;
     }
-  power_capacity = temp;
+  power_capacity = (uint16_t)temp;
 
   maximum_power_consumption = configuration_parameter_data[3];
   maximum_power_consumption |= (configuration_parameter_data[4] << 8);
@@ -6778,7 +6778,7 @@ ipmi_oem_dell_power_monitoring_over_interval (ipmi_oem_state_data_t *state_data)
 {
   uint8_t bytes_rq[IPMI_OEM_MAX_BYTES];
   uint8_t bytes_rs[IPMI_OEM_MAX_BYTES];
-  unsigned int temp;
+  unsigned long temp;
   char *endptr = NULL;
   unsigned int power_monitoring_averaging_interval;
   uint16_t average_power_consumption;
@@ -6805,7 +6805,7 @@ ipmi_oem_dell_power_monitoring_over_interval (ipmi_oem_state_data_t *state_data)
                        state_data->prog_data->args->oem_options[0]);
       goto cleanup;
     }
-  power_monitoring_averaging_interval = temp;
+  power_monitoring_averaging_interval = (unsigned int)temp;
 
   if (strcasecmp (state_data->prog_data->args->oem_options[1], "systempower")
       && strcasecmp (state_data->prog_data->args->oem_options[1], "cpu1")
@@ -7385,6 +7385,7 @@ int
 ipmi_oem_dell_slot_power_toggle (ipmi_oem_state_data_t *state_data)
 {
   char *endptr = NULL;
+  unsigned long temp;
   unsigned int slot_number;
   int rv = -1;
 
@@ -7392,7 +7393,7 @@ ipmi_oem_dell_slot_power_toggle (ipmi_oem_state_data_t *state_data)
   assert (state_data->prog_data->args->oem_options_count == 1);
 
   errno = 0;
-  slot_number = strtoul (state_data->prog_data->args->oem_options[0], &endptr, 10);
+  temp = strtoul (state_data->prog_data->args->oem_options[0], &endptr, 10);
   if (errno
       || endptr[0] != '\0')
     {
@@ -7405,8 +7406,8 @@ ipmi_oem_dell_slot_power_toggle (ipmi_oem_state_data_t *state_data)
       goto cleanup;
     }
 
-  if (slot_number < IPMI_OEM_DELL_SLOT_POWER_CONTROL_SLOT_NUMBER_MIN
-      || slot_number > IPMI_OEM_DELL_SLOT_POWER_CONTROL_SLOT_NUMBER_MAX)
+  if (temp < IPMI_OEM_DELL_SLOT_POWER_CONTROL_SLOT_NUMBER_MIN
+      || temp > IPMI_OEM_DELL_SLOT_POWER_CONTROL_SLOT_NUMBER_MAX)
     {
       pstdout_fprintf (state_data->pstate,
                        stderr,
@@ -7416,6 +7417,8 @@ ipmi_oem_dell_slot_power_toggle (ipmi_oem_state_data_t *state_data)
                        state_data->prog_data->args->oem_options[0]);
       goto cleanup;
     }
+
+  slot_number = (unsigned int)temp;
 
   if (_ipmi_oem_dell_do_slot_power_toggle (state_data, slot_number) < 0)
     goto cleanup;
@@ -7448,6 +7451,7 @@ int
 ipmi_oem_dell_slot_power_control (ipmi_oem_state_data_t *state_data)
 {
   char *endptr = NULL;
+  unsigned long temp;
   unsigned int slot_number;
   /* See comments above w/ IPMI_OEM_DELL_SLOT_POWER_CONTROL_OPTIMIZE */
 #if IPMI_OEM_DELL_SLOT_POWER_CONTROL_OPTIMIZE
@@ -7495,7 +7499,7 @@ ipmi_oem_dell_slot_power_control (ipmi_oem_state_data_t *state_data)
     }
 
   errno = 0;
-  slot_number = strtoul (state_data->prog_data->args->oem_options[2], &endptr, 10);
+  temp = strtoul (state_data->prog_data->args->oem_options[2], &endptr, 10);
   if (errno
       || endptr[0] != '\0')
     {
@@ -7508,8 +7512,8 @@ ipmi_oem_dell_slot_power_control (ipmi_oem_state_data_t *state_data)
       goto cleanup;
     }
 
-  if (slot_number < IPMI_OEM_DELL_SLOT_POWER_CONTROL_SLOT_NUMBER_MIN
-      || slot_number > IPMI_OEM_DELL_SLOT_POWER_CONTROL_SLOT_NUMBER_MAX)
+  if (temp < IPMI_OEM_DELL_SLOT_POWER_CONTROL_SLOT_NUMBER_MIN
+      || temp > IPMI_OEM_DELL_SLOT_POWER_CONTROL_SLOT_NUMBER_MAX)
     {
       pstdout_fprintf (state_data->pstate,
                        stderr,
@@ -7519,6 +7523,8 @@ ipmi_oem_dell_slot_power_control (ipmi_oem_state_data_t *state_data)
                        state_data->prog_data->args->oem_options[2]);
       goto cleanup;
     }
+
+  slot_number = (unsigned int)temp;
 
   /* See comments above w/ IPMI_OEM_DELL_SLOT_POWER_CONTROL_OPTIMIZE */
 #if IPMI_OEM_DELL_SLOT_POWER_CONTROL_OPTIMIZE
@@ -8002,6 +8008,7 @@ ipmi_oem_dell_set_port_map (ipmi_oem_state_data_t *state_data)
   uint8_t bytes_rq[IPMI_OEM_MAX_BYTES];
   uint8_t bytes_rs[IPMI_OEM_MAX_BYTES];
   char *endptr = NULL;
+  unsigned long temp;
   unsigned int ipass_mapping;
   uint8_t slot_mapping;
   uint8_t slot_mapping_subtype_is_1_2;
@@ -8031,7 +8038,7 @@ ipmi_oem_dell_set_port_map (ipmi_oem_state_data_t *state_data)
     }
 
   errno = 0;
-  ipass_mapping = strtoul (state_data->prog_data->args->oem_options[1], &endptr, 10);
+  temp = strtoul (state_data->prog_data->args->oem_options[1], &endptr, 10);
   if (errno
       || endptr[0] != '\0')
     {
@@ -8044,8 +8051,8 @@ ipmi_oem_dell_set_port_map (ipmi_oem_state_data_t *state_data)
       goto cleanup;
     }
 
-  if (ipass_mapping < IPMI_OEM_DELL_PORT_MAP_IPASS_MAPPING_MIN
-      || ipass_mapping > IPMI_OEM_DELL_PORT_MAP_IPASS_MAPPING_MAX)
+  if (temp < IPMI_OEM_DELL_PORT_MAP_IPASS_MAPPING_MIN
+      || temp > IPMI_OEM_DELL_PORT_MAP_IPASS_MAPPING_MAX)
     {
       pstdout_fprintf (state_data->pstate,
                        stderr,
@@ -8055,6 +8062,8 @@ ipmi_oem_dell_set_port_map (ipmi_oem_state_data_t *state_data)
                        state_data->prog_data->args->oem_options[2]);
       goto cleanup;
     }
+
+  ipass_mapping = (unsigned int)temp;
 
   if (strcasecmp (state_data->prog_data->args->oem_options[2], "1:2")
       && strcasecmp (state_data->prog_data->args->oem_options[2], "1:4")
