@@ -244,6 +244,14 @@ _ipmi_config_keypair_parse_string (const char *str,
   if (value_tok)
     value_tok = strtok_r (value_tok, " \t", &buf);
 
+  if (!(section_name_tok && key_name_tok))
+    {
+      fprintf (stderr,
+               "Improperly input keypair '%s'\n",
+               str);
+      goto cleanup;
+    }
+
   if (section_name_tok)
     {
       if (!(ptr = strdup (section_name_tok)))

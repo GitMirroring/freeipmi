@@ -1,5 +1,10 @@
 2026-09-11 Albert Chu <chu11@llnl.gov>
 
+	* ipmi-config/ipmi-config-argp.c (_ipmi_config_keypair_parse_string):
+	Reject whitespace-only section and key names after trimming them.
+
+2026-09-11 Albert Chu <chu11@llnl.gov>
+
 	* ipmi-config/ipmi-config.c, ipmi-config/ipmi-config-argp.c: Create
 	checkout files with owner-only permissions and restrict existing output
 	files before writing configuration data.
