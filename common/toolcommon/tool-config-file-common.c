@@ -107,13 +107,37 @@ _config_file_uint8 (conffile_t cf,
 
   value = (uint8_t *)option_ptr;
 
-  if (data->intval < 0)
+  if (data->intval < 0 || data->intval > UINT8_MAX)
     {
       fprintf (stderr, "Config File Error: invalid value for %s\n", optionname);
       exit (EXIT_FAILURE);
     }
 
   *value = data->intval;
+  return (0);
+}
+
+static int
+_config_file_channel_number (conffile_t cf,
+                             struct conffile_data *data,
+                             char *optionname,
+                             int option_type,
+                             void *option_ptr,
+                             int option_data,
+                             void *app_ptr,
+                             int app_data)
+{
+  assert (data);
+  assert (optionname);
+  assert (option_ptr);
+
+  if (!IPMI_CHANNEL_NUMBER_VALID (data->intval))
+    {
+      fprintf (stderr, "Config File Error: invalid value for %s\n", optionname);
+      exit (EXIT_FAILURE);
+    }
+
+  *((uint8_t *)option_ptr) = data->intval;
   return (0);
 }
 
@@ -1507,7 +1531,7 @@ config_file_parse (const char *filename,
         "target-channel-number",
         CONFFILE_OPTION_INT,
         -1,
-        _config_file_uint8,
+        _config_file_channel_number,
         1,
         0,
         &target_channel_number_count,

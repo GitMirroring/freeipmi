@@ -1,5 +1,11 @@
 2026-09-14 Albert Chu <chu11@llnl.gov>
 
+	* common/toolcommon/tool-config-file-common.c (_config_file_uint8,
+	_config_file_channel_number): Reject uint8 values that would be truncated
+	and validate target channel numbers.
+
+2026-09-14 Albert Chu <chu11@llnl.gov>
+
 	* ipmi-raw/ipmi-raw.c (string2bytes),
 	ipmi-raw/ipmi-raw-argp.c (cmdline_parse): Convert input bytes to unsigned
 	char before classifying hexadecimal digits.
