@@ -1,5 +1,10 @@
 2026-09-14 Albert Chu <chu11@llnl.gov>
 
+	* libipmidetect/ipmidetect.c (ipmidetect_load_data): Preserve handle
+	state when rejecting a load before setup.
+
+2026-09-14 Albert Chu <chu11@llnl.gov>
+
 	* common/toolcommon/pstdout.c (pstdout_launch): Recheck the fanout limit
 	after every condition-variable wakeup.
 

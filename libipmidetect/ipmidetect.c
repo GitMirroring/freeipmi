@@ -608,7 +608,7 @@ ipmidetect_load_data (ipmidetect_t handle,
   struct ipmidetect_config conffile_config;
 
   if (_unloaded_handle_error_check (handle) < 0)
-    goto cleanup;
+    return (-1);
 
   memset (&conffile_config, '\0', sizeof (struct ipmidetect_config));
 
