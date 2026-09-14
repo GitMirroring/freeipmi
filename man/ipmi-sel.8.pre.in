@@ -269,7 +269,7 @@ Show all SEL records across a cluster using IPMI over LAN.
 .PP
 Delete SEL records 44 and 82 on the local machine.
 .PP
-.B # ipmi-sel --delete-all
+.B # ipmi-sel --clear
 .PP
 Delete all SEL entries on the local machine.
 .PP
