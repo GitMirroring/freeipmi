@@ -286,10 +286,10 @@ _unmarshall_uint32 (uint8_t *databuf, uint32_t *value)
   assert (value);
 
   /* stored little endian */
-  (*value) = databuf[0];
-  (*value) |= (databuf[1] << 8);
-  (*value) |= (databuf[2] << 16);
-  (*value) |= (databuf[3] << 24);
+  (*value) = (uint32_t)databuf[0];
+  (*value) |= ((uint32_t)databuf[1] << 8);
+  (*value) |= ((uint32_t)databuf[2] << 16);
+  (*value) |= ((uint32_t)databuf[3] << 24);
 
   return (sizeof (uint32_t));
 }
