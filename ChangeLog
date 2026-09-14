@@ -1,5 +1,11 @@
 2026-09-14 Albert Chu <chu11@llnl.gov>
 
+	* ipmiconsole/ipmiconsole-argp.c
+	(_ipmiconsole_config_file_parse): Apply configured SOL payload instance
+	and deactivate-all-instances values.
+
+2026-09-14 Albert Chu <chu11@llnl.gov>
+
 	* ipmiseld/ipmiseld-cache.c (_unmarshall_uint32): Promote cache bytes
 	to uint32_t before shifting them into place.
 

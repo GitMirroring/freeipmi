@@ -295,6 +295,10 @@ _ipmiconsole_config_file_parse (struct ipmiconsole_arguments *cmd_args)
     cmd_args->serial_keepalive = config_file_data.serial_keepalive;
   if (config_file_data.serial_keepalive_empty_count)
     cmd_args->serial_keepalive_empty = config_file_data.serial_keepalive_empty;
+  if (config_file_data.sol_payload_instance_count)
+    cmd_args->sol_payload_instance = config_file_data.sol_payload_instance;
+  if (config_file_data.deactivate_all_instances_count)
+    cmd_args->deactivate_all_instances = config_file_data.deactivate_all_instances;
   if (config_file_data.lock_memory_count)
     cmd_args->lock_memory = config_file_data.lock_memory;
 }
