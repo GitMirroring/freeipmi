@@ -115,7 +115,7 @@ the
 \fB\-\-power\-limit\-requested\fR,
 \fB\-\-correction\-time\-limit\fR,
 and
-\fB\-\-correction\-time\-limit\fR
+\fB\-\-statistics\-sampling\-period\fR
 options
 listed below.  If one or more options below are not specified, current
 configuration will be utilized.
