@@ -1,3 +1,8 @@
+2026-09-14 Albert Chu <chu11@llnl.gov>
+
+	* man/ipmi-sel.8.pre.in: Use the current SEL-clearing option in the
+	example.
+
 2026-09-11 Albert Chu <chu11@llnl.gov>
 
 	* man/ipmi-chassis.8.pre.in: Use the current chassis-status option in
