@@ -1,5 +1,10 @@
 2026-09-14 Albert Chu <chu11@llnl.gov>
 
+	* common/toolcommon/pstdout.c (pstdout_launch): Recheck the fanout limit
+	after every condition-variable wakeup.
+
+2026-09-14 Albert Chu <chu11@llnl.gov>
+
 	* common/toolcommon/tool-config-file-common.c (_config_file_driver_type):
 	Reject in-band driver types when parsing out-of-band-only configuration.
 

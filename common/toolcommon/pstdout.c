@@ -1547,7 +1547,7 @@ pstdout_launch(const char *hostnames, Pstdout_Thread pstdout_func, void *arg)
         }
       threadcount_mutex_locked++;
 
-      if (pstdout_threadcount == pstdout_fanout)
+      while (pstdout_threadcount >= pstdout_fanout)
         {
           if ((rc = pthread_cond_wait(&pstdout_threadcount_cond, &pstdout_threadcount_mutex)))
             {
