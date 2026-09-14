@@ -133,7 +133,7 @@ cmdline_parse (int key, char *arg, struct argp_state *state)
                 exit (EXIT_FAILURE);
               }
 
-            if (!isxdigit (arg[i]))
+            if (!isxdigit ((unsigned char) arg[i]))
               {
                 fprintf (stderr, "invalid hex byte argument\n");
                 exit (EXIT_FAILURE);

@@ -204,7 +204,7 @@ string2bytes (ipmi_raw_state_data_t *state_data,
 
       for (i = 0; i < l; i++)
         {
-          if (!isxdigit (token[i]))
+          if (!isxdigit ((unsigned char) token[i]))
             {
               pstdout_fprintf (state_data->pstate,
                                stderr,

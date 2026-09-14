@@ -1,5 +1,11 @@
 2026-09-14 Albert Chu <chu11@llnl.gov>
 
+	* ipmi-raw/ipmi-raw.c (string2bytes),
+	ipmi-raw/ipmi-raw-argp.c (cmdline_parse): Convert input bytes to unsigned
+	char before classifying hexadecimal digits.
+
+2026-09-14 Albert Chu <chu11@llnl.gov>
+
 	* man/ipmi-dcmi.8.pre.in: List the statistics sampling period among the
 	Set Power Limit options.
 
