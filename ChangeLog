@@ -1,5 +1,13 @@
 2026-09-14 Albert Chu <chu11@llnl.gov>
 
+	* common/toolcommon/tool-cmdline-common.c (common_parse_opt),
+	common/toolcommon/tool-cmdline-common.h (common_cmd_args),
+	common/toolcommon/tool-config-file-common.c (_config_file_positive_uint8,
+	_config_file_positive_uint16): Validate in-band driver addresses and
+	register spacing against the types accepted by the API.
+
+2026-09-14 Albert Chu <chu11@llnl.gov>
+
 	* common/toolcommon/tool-config-file-common.c (_config_file_uint8,
 	_config_file_channel_number): Reject uint8 values that would be truncated
 	and validate target channel numbers.

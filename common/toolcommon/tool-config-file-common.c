@@ -141,6 +141,54 @@ _config_file_channel_number (conffile_t cf,
   return (0);
 }
 
+static int
+_config_file_positive_uint8 (conffile_t cf,
+                             struct conffile_data *data,
+                             char *optionname,
+                             int option_type,
+                             void *option_ptr,
+                             int option_data,
+                             void *app_ptr,
+                             int app_data)
+{
+  assert (data);
+  assert (optionname);
+  assert (option_ptr);
+
+  if (data->intval <= 0 || data->intval > UINT8_MAX)
+    {
+      fprintf (stderr, "Config File Error: invalid value for %s\n", optionname);
+      exit (EXIT_FAILURE);
+    }
+
+  *((uint8_t *)option_ptr) = data->intval;
+  return (0);
+}
+
+static int
+_config_file_positive_uint16 (conffile_t cf,
+                              struct conffile_data *data,
+                              char *optionname,
+                              int option_type,
+                              void *option_ptr,
+                              int option_data,
+                              void *app_ptr,
+                              int app_data)
+{
+  assert (data);
+  assert (optionname);
+  assert (option_ptr);
+
+  if (data->intval <= 0 || data->intval > UINT16_MAX)
+    {
+      fprintf (stderr, "Config File Error: invalid value for %s\n", optionname);
+      exit (EXIT_FAILURE);
+    }
+
+  *((uint16_t *)option_ptr) = data->intval;
+  return (0);
+}
+
 #if 0
 /* Presently unused, remove to remove compiler warning, leave for potential future use */
 static int
@@ -1498,7 +1546,7 @@ config_file_parse (const char *filename,
         "driver-address",
         CONFFILE_OPTION_INT,
         -1,
-        _config_file_positive_int,
+        _config_file_positive_uint16,
         1,
         0,
         &driver_address_count,
@@ -1520,7 +1568,7 @@ config_file_parse (const char *filename,
         "register-spacing",
         CONFFILE_OPTION_INT,
         -1,
-        _config_file_positive_unsigned_int,
+        _config_file_positive_uint8,
         1,
         0,
         &register_spacing_count,

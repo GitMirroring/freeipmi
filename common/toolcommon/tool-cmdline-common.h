@@ -195,9 +195,9 @@ struct common_cmd_args
   ipmi_driver_type_t driver_type;
   int driver_type_outofband_only; /* flag - set internally only */
   int disable_auto_probe;
-  unsigned int driver_address;
+  uint16_t driver_address;
   char *driver_device;
-  unsigned int register_spacing;
+  uint8_t register_spacing;
   uint8_t target_channel_number;
   int target_channel_number_is_set; /* user can input zero, so need a flag */
   uint8_t target_slave_address;

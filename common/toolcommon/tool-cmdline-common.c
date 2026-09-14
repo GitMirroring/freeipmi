@@ -136,7 +136,7 @@ common_parse_opt (int key,
       if (errno
           || endptr[0] != '\0'
           || tmp <= 0
-          || (unsigned long)tmp > UINT_MAX)
+          || (unsigned long)tmp > UINT16_MAX)
         {
           fprintf (stderr, "invalid driver address\n");
           exit (EXIT_FAILURE);
@@ -157,7 +157,7 @@ common_parse_opt (int key,
       if (errno
           || endptr[0] != '\0'
           || tmp <= 0
-          || (unsigned long)tmp > UINT_MAX)
+          || (unsigned long)tmp > UINT8_MAX)
         {
           fprintf (stderr, "invalid register spacing\n");
           exit (EXIT_FAILURE);
