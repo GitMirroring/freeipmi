@@ -137,6 +137,9 @@ ipmiseld_ipmi_setup (ipmiseld_host_data_t *host_data)
         }
       else
         {
+          parse_get_freeipmi_outofband_flags (common_args->workaround_flags_outofband,
+                                              &workaround_flags);
+
           if (ipmi_ctx_open_outofband (host_data->host_poll->ipmi_ctx,
                                        host_data->hostname,
                                        common_args->username,
