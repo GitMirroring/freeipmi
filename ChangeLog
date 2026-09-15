@@ -1,3 +1,7 @@
+2026-09-15 Albert Chu <chu11@llnl.gov>
+
+	* man/ipmidetect.8.pre.in: Correct the documented default server port.
+
 2026-09-14 Albert Chu <chu11@llnl.gov>
 
 	* ipmiconsole/ipmiconsole.c (_stdin): Display the configured escape
