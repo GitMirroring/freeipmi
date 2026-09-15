@@ -634,7 +634,8 @@ _send_ping_data (void)
   while ((info = list_next (itr)))
     {
       char buf[IPMIDETECTD_BUFLEN];
-      int len, n;
+      int len;
+      ssize_t n;
 
       len = snprintf (buf, IPMIDETECTD_BUFLEN, "%s %lu\n", info->hostname, (unsigned long)info->last_received.tv_sec);
       if (len >= IPMIDETECTD_BUFLEN)
@@ -642,14 +643,16 @@ _send_ping_data (void)
 
       if ((n = fd_write_n (rhost_fd, buf, len)) < 0)
         {
-          if (errno == EPIPE)
-            break;
-          else
-            err_exit ("fd_write_n: %s", strerror (errno));
+          if (errno != EPIPE)
+            err_output ("fd_write_n: %s", strerror (errno));
+          break;
         }
 
       if (n != len)
-        err_exit ("fd_write_n: n=%d len=%d", n, len);
+        {
+          err_output ("fd_write_n: n=%ld len=%d", (long)n, len);
+          break;
+        }
     }
 
   list_iterator_destroy (itr);
