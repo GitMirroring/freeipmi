@@ -56,7 +56,7 @@ listed must be the shortened names of hostnames.
 server hostname (default=localhost)
 .TP
 \fB\-p\fR \fIINT\fR, \fB\-\-port\fR=\fIINT\fR
-server port (default=8649)
+server port (default=9225)
 .TP
 \fB\-d\fR, \fB\-\-detected\fR
 List only detected nodes
