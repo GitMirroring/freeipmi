@@ -1,5 +1,11 @@
 2026-09-14 Albert Chu <chu11@llnl.gov>
 
+	* ipmiconsole/ipmiconsole-argp.c (cmdline_parse,
+	_ipmiconsole_args_validate): Reject ambiguous or non-character escape
+	arguments.
+
+2026-09-14 Albert Chu <chu11@llnl.gov>
+
 	* ipmiconsole/ipmiconsole-argp.c
 	(_ipmiconsole_config_file_parse): Apply configured SOL payload instance
 	and deactivate-all-instances values.

@@ -183,6 +183,11 @@ cmdline_parse (int key, char *arg, struct argp_state *state)
   switch (key)
     {
     case ESCAPE_CHAR_KEY:          /* --escape-char */
+      if (!arg[0] || arg[1])
+        {
+          fprintf (stderr, "escape character must be exactly one character\n");
+          exit (EXIT_FAILURE);
+        }
       cmd_args->escape_char = *arg;
       break;
     case DONT_STEAL_KEY:       /* --dont-steal */
@@ -307,6 +312,15 @@ static void
 _ipmiconsole_args_validate (struct ipmiconsole_arguments *cmd_args)
 {
   assert (cmd_args);
+
+  if (cmd_args->escape_char == '?'
+      || cmd_args->escape_char == '.'
+      || cmd_args->escape_char == 'B'
+      || cmd_args->escape_char == 'D')
+    {
+      fprintf (stderr, "escape character conflicts with an escape command\n");
+      exit (EXIT_FAILURE);
+    }
 
   if (!cmd_args->common_args.hostname)
     {
