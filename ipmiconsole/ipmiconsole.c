@@ -148,7 +148,10 @@ _stdin (ipmiconsole_ctx_t c,
               printf ("%c. - exit\r\n", escape_char);
               printf ("%cB - generate break\r\n", escape_char);
               printf ("%cD - send DEL character\r\n", escape_char);
-              printf ("%c& - & character\r\n", escape_char);
+              printf ("%c%c - %c character\r\n",
+                      escape_char,
+                      escape_char,
+                      escape_char);
             }
           else if (buf[i] == '.')
             {

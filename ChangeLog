@@ -1,5 +1,10 @@
 2026-09-14 Albert Chu <chu11@llnl.gov>
 
+	* ipmiconsole/ipmiconsole.c (_stdin): Display the configured escape
+	character in the quoting help text.
+
+2026-09-14 Albert Chu <chu11@llnl.gov>
+
 	* ipmiconsole/ipmiconsole-argp.c (cmdline_parse,
 	_ipmiconsole_args_validate): Reject ambiguous or non-character escape
 	arguments.
