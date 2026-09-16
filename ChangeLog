@@ -1,5 +1,10 @@
 2026-09-16 Albert Chu <chu11@llnl.gov>
 
+	* ipmiping/ipmiping.c (endresult), rmcpping/rmcpping.c (endresult):
+	Print packet counters with unsigned conversions.
+
+2026-09-16 Albert Chu <chu11@llnl.gov>
+
 	* ipmi-locate/ipmi-locate.c (defaults_display): Mark unavailable BT
 	defaults explicitly.
 

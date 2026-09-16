@@ -450,7 +450,7 @@ endresult (const char *progname,
     percent = ((double)(sent_count - recv_count)/sent_count)*100;
 
   printf ("--- %s %s statistics ---\n", progname, dest);
-  printf ("%d requests transmitted, %d responses received in time, "
+  printf ("%u requests transmitted, %u responses received in time, "
           "%2.1f%% packet loss\n",
           sent_count, recv_count, percent);
 
