@@ -508,7 +508,7 @@ defaults_display (ipmi_locate_ctx_t ctx)
 #else /* !0 */
 
   printf ("BT device default values: ");
-  printf ("\n");
+  printf ("unavailable\n\n");
 
 #endif  /* !0 */
 

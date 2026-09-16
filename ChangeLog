@@ -1,3 +1,8 @@
+2026-09-16 Albert Chu <chu11@llnl.gov>
+
+	* ipmi-locate/ipmi-locate.c (defaults_display): Mark unavailable BT
+	defaults explicitly.
+
 2026-09-15 Albert Chu <chu11@llnl.gov>
 
 	* ipmidetectd/ipmidetectd.c (_send_ping_data): Keep client write errors
